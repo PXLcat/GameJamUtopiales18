@@ -16,6 +16,7 @@ namespace GameJamUtopiales
         public int windowWidth;
         public int windowHeight;
         public Factory factory;
+        public Player player;
 
         public Scene(MainGame mG)
         {
@@ -29,6 +30,7 @@ namespace GameJamUtopiales
 
             factory = Factory.Instance;
             factory.SetMainGame(mainGame);
+            player = Player.Instance;
 
             windowWidth = mainGame.GraphicsDevice.Viewport.Bounds.Width; 
             windowHeight = mainGame.GraphicsDevice.Viewport.Bounds.Height;

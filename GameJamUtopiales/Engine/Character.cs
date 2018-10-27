@@ -120,7 +120,7 @@ namespace GameJamUtopiales
                 ResetPose();
             }
             ContinueActions();
-            ApplyGravity();
+            //ApplyGravity();
             CheckCollisions(currentMap);
 
             CurrentPosition += Movement;

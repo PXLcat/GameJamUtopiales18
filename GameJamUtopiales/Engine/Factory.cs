@@ -45,6 +45,13 @@ namespace GameJamUtopiales
                         new AnimatedSprite(mG.Content.Load<Texture2D>("mami_jump"), Vector2.Zero, 8, framespeed: 4),
                         new AnimatedSprite(mG.Content.Load<Texture2D>("mami_fall"), Vector2.Zero, 3),
                         new AnimatedSprite(mG.Content.Load<Texture2D>("mami_attack1"), Vector2.Zero, 11, framespeed: 4));
+                case CharacterName.SAYAKA:
+                    return new Character(CharacterName.SAYAKA, new AnimatedSprite(mG.Content.Load<Texture2D>("sayaka/sayaka_idle"), Vector2.Zero, 10),
+                        new AnimatedSprite(mG.Content.Load<Texture2D>("sayaka/sayaka_run"), Vector2.Zero, 8),
+                        new AnimatedSprite(mG.Content.Load<Texture2D>("sayaka/sayaka_jump"), Vector2.Zero, 6),
+                        new AnimatedSprite(mG.Content.Load<Texture2D>("sayaka/sayaka_fall"), Vector2.Zero, 3),
+                        new AnimatedSprite(mG.Content.Load<Texture2D>("sayaka/sayaka_attack"), Vector2.Zero, 6));
+
                 default:
                     return null;
             }
@@ -56,7 +63,8 @@ namespace GameJamUtopiales
 
     public enum CharacterName
     {
-        MAMI
+        MAMI,
+        SAYAKA
     }
     public enum ForegroundItemName
     {

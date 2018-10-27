@@ -35,6 +35,18 @@ namespace GameJamUtopiales
                 Console.Write("input attack1 (space)");
             }
 
+            //Tests métamorphoses
+            if (newKbState.IsKeyDown(Keys.NumPad1) && newKbState != oldKbState)
+            {
+                Player.Instance.SwitchCharacter(CharacterStates.HUMAN);
+            }
+            if (newKbState.IsKeyDown(Keys.NumPad2) && newKbState != oldKbState)
+            {
+                Player.Instance.SwitchCharacter(CharacterStates.HULK);
+            }
+            //____________________
+
+
             oldKbState = newKbState;
 
             return inputs;
