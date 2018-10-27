@@ -65,7 +65,7 @@ namespace GameJamUtopiales
             FrameWidth = Texture.Width / Columns;
             FrameHeight = Texture.Height;
 
-            center = new Vector2(FrameWidth / 2, FrameHeight / 2);
+            center = new Vector2(FrameWidth / 2, FrameHeight);
         }
 
         /// <summary>

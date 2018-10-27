@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace GameJamUtopiales
 {
-    public class Character : IDrawable , ICollidable
+    public class Character : IDrawable, ICollidable
     {
 
         public CharacterName CharacterName;
@@ -149,7 +149,7 @@ namespace GameJamUtopiales
             CurrentPosition += Movement;
             if (isGrounded)
             {
-                CurrentPosition = new Vector2(CurrentPosition.X, groundedHeight-CurrentSprite.FrameHeight/2);
+                CurrentPosition = new Vector2(CurrentPosition.X, groundedHeight);
             }
             CurrentSprite.CurrentPosition = CurrentPosition; //TODO redondant avec la ligne précédente; faire un eventHandler pour qu'à chaque
             CurrentSprite.Update();                             //changement de sprite, la position se màj automatiquement par rapport à CharaPosition?
@@ -177,7 +177,7 @@ namespace GameJamUtopiales
 
                 if (jumpsDone < maxJumps)
                 {
-                    //Jump();
+                    Jump();
                 }
 
 
@@ -212,6 +212,18 @@ namespace GameJamUtopiales
 
         }
 
+        private void Jump() {
+            this.JumpInitPosY = this.CurrentPosition.Y;
+
+            jumpsDone++;
+
+            CharacterState = State.JUMPING;
+            isGrounded = false;
+            spriteJump.CurrentFrame = 0;
+
+
+            velocity = -12; //TODO externaliser
+        }
 
         private void MoveRight()
         {
@@ -230,7 +242,7 @@ namespace GameJamUtopiales
         {
             if (CharacterState != State.ATTACKING1)
             {
-                if (CharacterState == State.IDLE) 
+                if (CharacterState == State.IDLE)
                 {
                     CharacterState = State.RUNNING;
                 }
@@ -241,36 +253,42 @@ namespace GameJamUtopiales
 
         public void Draw(SpriteBatch sb)
         {
-            CurrentSprite.Draw(sb, (CharacterFaces == Facing.LEFT)); 
+            CurrentSprite.Draw(sb, (CharacterFaces == Facing.LEFT));
         }
 
-        public void ApplyGravity() {
-            float finalVelocity;
-            if ((velocity + gravity) > maxVelocity)
+        public void ApplyGravity()
+        {
+            //if(CharacterState == State.JUMPING || CharacterState == S)
+            if (!isGrounded)
             {
-                finalVelocity = maxVelocity;
-            }
-            else
-            {
-                finalVelocity = (velocity += gravity);
+                if ((velocity + gravity) > maxVelocity)
+                {
+                    velocity = maxVelocity;
+                }
+                else
+                {
+                    velocity += gravity;
+                }
             }
 
-            if (finalVelocity > gravity)
+
+            if (velocity > 0)
             {
                 CharacterState = State.FALLING;
             }
-            Vector2 nextPosition = new Vector2(this.CurrentPosition.X + this.Movement.X, (this.CurrentPosition.Y + this.Movement.Y + finalVelocity));
-            Debug.WriteLine("final velocity : " + finalVelocity);
+            //Vector2 nextPosition = new Vector2(this.CurrentPosition.X + this.Movement.X, (this.CurrentPosition.Y + this.Movement.Y + velocity));
+            Debug.WriteLine("velocity : " + velocity);
 
-            this.Movement = new Vector2(this.Movement.X, (this.Movement.Y + finalVelocity));
+            this.Movement = new Vector2(this.Movement.X, (this.Movement.Y + velocity));
 
 
 
         }
 
-        public void CheckCollisions(List<CollidableObject> collidableItems) {
+        public void CheckCollisions(List<CollidableObject> collidableItems)
+        {
 
-            Rectangle nextPosition = new Rectangle((int)(CurrentPosition.X + Movement.X), (int)(CurrentPosition.Y + Movement.Y), 
+            Rectangle nextPosition = new Rectangle((int)(CurrentPosition.X + Movement.X), (int)(CurrentPosition.Y + Movement.Y),
                 CurrentSprite.Texture.Width, CurrentSprite.Texture.Height); //TODO attention au check qui varie selon la taille du sprite!
 
             //bool doReset = false;
@@ -303,15 +321,12 @@ namespace GameJamUtopiales
             //}
             if (collision.collideBottom)
             {
-                if ((CharacterState == State.FALLING))
+                if (CharacterState == State.FALLING)
                 {
-                    if (collision.collideBottom)
-                    {
-                        ResetPose();
-                        Movement = new Vector2(Movement.X, 0); //(Movement.X, 0+CurrentSprite.FrameHeight- collision.bottomCollisionDepth);
-                        isGrounded = true;
-                    }
-
+                    ResetPose();
+                    Debug.WriteLine("collision sol");
+                    Movement = new Vector2(Movement.X, 0); //(Movement.X, 0+CurrentSprite.FrameHeight- collision.bottomCollisionDepth);
+                    isGrounded = true;
                 }
 
             }
@@ -329,6 +344,8 @@ namespace GameJamUtopiales
         {
             //TODO eventarg pour qu'à chaque changement de currentSprite, la position se mette à jour toute seule?
             CharacterState = State.IDLE;
+            jumpsDone = 0;
+            velocity = 0;
         }
 
         public void OnCollision(ICollidable other)
