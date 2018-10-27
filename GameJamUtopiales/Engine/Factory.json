@@ -1,0 +1,15 @@
+{
+  "Characters": {
+    "mami": {
+      "sprites": {
+        "idle": {
+          "framesNb": "7"
+        },
+        "jump": {
+          "framesNb": "7",
+          "frameSpeed": "4"
+        }
+      }
+    }
+  }
+}
