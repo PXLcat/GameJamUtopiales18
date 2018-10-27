@@ -12,8 +12,6 @@ namespace GameJamUtopiales
 {
     public class Map
     {
-        int scrollX;
-        int scrollY;
         int maxScrollX;
         int maxScrollY;
 
@@ -29,6 +27,9 @@ namespace GameJamUtopiales
         int windowWidth;
         int windowHeight;
 
+        public int ScrollX { get; private set; }
+        public int ScrollY { get; private set; }
+
         public List<CollidableObject> layerPlayer = new List<CollidableObject>(); //(ce qui est au même niveau que les Character avec lesquels y'a des collisions quoi)
 
         public Map()
@@ -36,7 +37,8 @@ namespace GameJamUtopiales
 
         }
 
-        public void Load(MainGame mainGame, int pWindowWidth, int pWindowHeight) {
+        public void Load(MainGame mainGame, int pWindowWidth, int pWindowHeight)
+        {
             map = new TmxMap("Content/tiled.tmx");
             tileset = mainGame.Content.Load<Texture2D>(map.Tilesets[0].Name.ToString());
 
@@ -79,14 +81,14 @@ namespace GameJamUtopiales
                     float x = column * tileWidth;
                     float y = line * tileHeight;
 
-                    Rectangle tilesetRec = new Rectangle(tileWidth * tilesetColumn, tileHeight * tilesetLine, tileWidth, tileHeight);
+                    //Rectangle tilesetRec = new Rectangle(tileWidth * tilesetColumn, tileHeight * tilesetLine, tileWidth, tileHeight);
 
                     switch (tileType)
                     {
                         case TileType.NOTHING:
                             break;
                         case TileType.TERRE:
-                            layerPlayer.Add(new CollidableObject(tileset, new Vector2(x, y), tilesetRec));
+                            layerPlayer.Add(new CollidableObject(new Vector2(x, y), tileWidth, tileWidth));
                             break;
                         case TileType.EXIT:
                             break;
@@ -113,29 +115,29 @@ namespace GameJamUtopiales
             Vector2 currentMamiPosition = player.CurrentPosition;
 
             // X Direction Scroll
-            scrollX -= (int)(windowWidth * 0.5f - currentMamiPosition.X);
+            ScrollX -= (int)(windowWidth * 0.5f - currentMamiPosition.X);
 
-            if (scrollX < 0)
+            if (ScrollX < 0)
             {
                 Console.WriteLine("Limit Scroll X LEFT");
-                scrollX = 0;
+                ScrollX = 0;
             }
-            else if (scrollX > maxScrollX)
+            else if (ScrollX > maxScrollX)
             {
                 Console.WriteLine("Limit Scroll X RIGHT");
-                scrollX = maxScrollX;
+                ScrollX = maxScrollX;
             }
             else
                 currentMamiPosition.X = windowWidth * 0.5f;
 
             // Y Direction Scroll
-            scrollY -= (int)(windowHeight * 0.5f - currentMamiPosition.Y);
+            ScrollY -= (int)(windowHeight * 0.5f - currentMamiPosition.Y);
 
             // On teste si on arrive aux bords de la map
-            if (scrollY < 0)
-                scrollY = 0;
-            else if (scrollY > maxScrollY)
-                scrollY = maxScrollY;
+            if (ScrollY < 0)
+                ScrollY = 0;
+            else if (ScrollY > maxScrollY)
+                ScrollY = maxScrollY;
             else
                 currentMamiPosition.Y = windowHeight * 0.5f;
 
@@ -175,8 +177,8 @@ namespace GameJamUtopiales
                         int tilesetColumn = tileFrame % tilesetColumns;
                         int tilesetLine = (int)Math.Floor((double)tileFrame / (double)tilesetColumns);
 
-                        float x = column * tileWidth - scrollX;
-                        float y = line * tileHeight - scrollY;
+                        float x = column * tileWidth - ScrollX;
+                        float y = line * tileHeight - ScrollY;
 
                         Rectangle tilesetRec = new Rectangle(tileWidth * tilesetColumn, tileHeight * tilesetLine, tileWidth, tileHeight);
 

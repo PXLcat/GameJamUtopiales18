@@ -56,7 +56,7 @@ namespace GameJamUtopiales
         {
             List<InputType> playerInputs = Input.DefineInputs(ref oldKbState);
 
-            mami.Update(playerInputs, listCollidable);
+            mami.Update(playerInputs, tiledMap);
             tiledMap.Update(mami);
 
             base.Update(gameTime);

@@ -108,7 +108,7 @@ namespace GameJamUtopiales
         {
             //utile?
         }
-        public void Update(List<InputType> inputs, List<CollidableObject> collidableItems)
+        public void Update(List<InputType> inputs, Map currentMap)
         {
             Movement = Vector2.Zero;
             if (inputs.Count > 0)
@@ -121,7 +121,7 @@ namespace GameJamUtopiales
             }
             ContinueActions();
             ApplyGravity();
-            CheckCollisions(collidableItems);
+            CheckCollisions(currentMap);
 
             CurrentPosition += Movement;
             if (isGrounded)
@@ -260,8 +260,9 @@ namespace GameJamUtopiales
 
         }
 
-        public void CheckCollisions(List<CollidableObject> collidableItems)
+        public void CheckCollisions(Map currentMap)
         {
+            List<CollidableObject> collidableItems = currentMap.layerPlayer;
 
             Rectangle nextPosition = new Rectangle((int)(CurrentPosition.X + Movement.X),
                 ((int)(CurrentPosition.Y + Movement.Y)), //TODO MAL FOUTU
@@ -270,13 +271,17 @@ namespace GameJamUtopiales
 
             //bool doReset = false;
             CollideType collision = new CollideType();
+            CollidableObject tmpCollidableObject = new CollidableObject();
             foreach (CollidableObject cObject in collidableItems)
             {
                 //est ce qu'on est au sol
+                tmpCollidableObject.CurrentPosition = new Vector2(cObject.CurrentPosition.X + currentMap.ScrollX, cObject.CurrentPosition.Y + currentMap.ScrollY);
+                tmpCollidableObject.Width = cObject.Width;
+                tmpCollidableObject.Height = cObject.Height;
+                collision = Utilities.CheckCollision(nextPosition, tmpCollidableObject.HitBox);
 
-                collision = Utilities.CheckCollision(nextPosition, cObject.HitBox);
                 if (collision.collideBottom)
-                    groundedHeight = cObject.HitBox.Top;
+                    groundedHeight = tmpCollidableObject.HitBox.Top;
 
 
                 //if (collision.collideLeft || collision.collideRight) //on devrait "coller" à l'objet qu'on percute
@@ -288,8 +293,6 @@ namespace GameJamUtopiales
                 //    doReset = true;
                 //    resetHeight = cObject.HitBox.Top - CurrentSprite.Texture.Height / 2;
                 //}
-
-
             }
 
             if (collision.collideBottom)
