@@ -36,13 +36,14 @@ namespace GameJamUtopiales
             consolas = mainGame.Content.Load<SpriteFont>("Consolas");
 
             player.Load(mainGame);
-            player.CurrentPlayerCharacter.CurrentPosition = new Vector2(100, 100);
+            player.CurrentPlayerCharacter.CurrentPosition = new Vector2(300, 300);
             grid = new DrawableImage(mainGame.Content.Load<Texture2D>("grid"), Vector2.Zero);
 
             //listCollidable.Add(new CollidableObject(mainGame.Content.Load<Texture2D>("tileproto1"), new Vector2(100, 400)));
 
             barrel = new DrawableImage(mainGame.Content.Load<Texture2D>("barrel"), new Vector2(200, 200));
             base.Load();
+            
         }
 
         public override void Unload()

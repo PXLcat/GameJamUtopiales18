@@ -12,7 +12,7 @@ namespace GameJamUtopiales
     public class Character : IDrawable, ICollidable
     {
 
-        public CharacterName CharacterName;
+        public CharacterMetamorphose CharacterMetamorphose;
         protected AnimatedSprite spriteIdle, spriteRun, spriteJump, spriteFall, spriteAttack1;
 
         private Vector2 movement; //new Vector2(déplacement horizontal, déplacement vertical)
@@ -84,7 +84,7 @@ namespace GameJamUtopiales
 
 
         #region Methods
-        public Character(CharacterName characterName, AnimatedSprite spriteIdle, AnimatedSprite spriteRun, AnimatedSprite spriteJump, AnimatedSprite spriteFall, AnimatedSprite spriteAttack1, int jumpHeight = 120, int maxJumps = 2, float runSpeed = 5)
+        public Character(CharacterMetamorphose characterName, AnimatedSprite spriteIdle, AnimatedSprite spriteRun, AnimatedSprite spriteJump, AnimatedSprite spriteFall, AnimatedSprite spriteAttack1, int jumpHeight = 120, int maxJumps = 2, float runSpeed = 5)
         {
             this.spriteIdle = spriteIdle;
             this.spriteRun = spriteRun;
@@ -95,7 +95,7 @@ namespace GameJamUtopiales
             JumpHeight = jumpHeight;
             RunSpeed = runSpeed;
 
-            this.CharacterName = characterName;
+            this.CharacterMetamorphose = characterName;
             this.CharacterState = State.IDLE;
             MaxJumps = maxJumps;
 
@@ -326,7 +326,7 @@ namespace GameJamUtopiales
 
         public void OnCollision(ICollidable other)
         {
-            Debug.Write("Collision entre " + this.CharacterName + " et " + other.ToString());
+            Debug.Write("Collision entre " + this.CharacterMetamorphose + " et " + other.ToString());
         }
 
 

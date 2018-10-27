@@ -34,20 +34,32 @@ namespace GameJamUtopiales
         { 
         }
 
-        public Character CreateCharacter(CharacterName characterName)
+        public Character CreateCharacter(CharacterMetamorphose characterState)
         {
             //attention à la présence ou non des animations
-            switch (characterName)
+            switch (characterState)
             {
-                case CharacterName.MAMI:
-                    return new Character(CharacterName.MAMI, new AnimatedSprite(mG.Content.Load<Texture2D>("mami_idle"), Vector2.Zero, 7, 5),
-                        new AnimatedSprite(mG.Content.Load<Texture2D>("mami_run"), Vector2.Zero, 8),
+                case CharacterMetamorphose.HUMAN:
+                    return new Character(CharacterMetamorphose.HUMAN, new AnimatedSprite(mG.Content.Load<Texture2D>("human_idle"), Vector2.Zero, 1),
+                        new AnimatedSprite(mG.Content.Load<Texture2D>("human_idle"), Vector2.Zero, 1),
                         new AnimatedSprite(mG.Content.Load<Texture2D>("mami_jump"), Vector2.Zero, 8, framespeed: 4),
                         new AnimatedSprite(mG.Content.Load<Texture2D>("mami_fall"), Vector2.Zero, 3),
                         new AnimatedSprite(mG.Content.Load<Texture2D>("mami_attack1"), Vector2.Zero, 11, framespeed: 4));
-                case CharacterName.SAYAKA:
-                    return new Character(CharacterName.SAYAKA, new AnimatedSprite(mG.Content.Load<Texture2D>("sayaka/sayaka_idle"), Vector2.Zero, 10),
-                        new AnimatedSprite(mG.Content.Load<Texture2D>("sayaka/sayaka_run"), Vector2.Zero, 8),
+                case CharacterMetamorphose.HULK:
+                    return new Character(CharacterMetamorphose.HULK, new AnimatedSprite(mG.Content.Load<Texture2D>("hulk_idle"), Vector2.Zero, 1),
+                        new AnimatedSprite(mG.Content.Load<Texture2D>("hulk_idle"), Vector2.Zero, 1),
+                        new AnimatedSprite(mG.Content.Load<Texture2D>("sayaka/sayaka_jump"), Vector2.Zero, 6),
+                        new AnimatedSprite(mG.Content.Load<Texture2D>("sayaka/sayaka_fall"), Vector2.Zero, 3),
+                        new AnimatedSprite(mG.Content.Load<Texture2D>("sayaka/sayaka_attack"), Vector2.Zero, 6));
+                case CharacterMetamorphose.FOETUS:
+                    return new Character(CharacterMetamorphose.HULK, new AnimatedSprite(mG.Content.Load<Texture2D>("foetus_idle"), Vector2.Zero, 1),
+                        new AnimatedSprite(mG.Content.Load<Texture2D>("sayaka/sayaka_run"), Vector2.Zero, 1),
+                        new AnimatedSprite(mG.Content.Load<Texture2D>("sayaka/sayaka_jump"), Vector2.Zero, 6),
+                        new AnimatedSprite(mG.Content.Load<Texture2D>("sayaka/sayaka_fall"), Vector2.Zero, 3),
+                        new AnimatedSprite(mG.Content.Load<Texture2D>("sayaka/sayaka_attack"), Vector2.Zero, 6));
+                case CharacterMetamorphose.SPIRIT:
+                    return new Character(CharacterMetamorphose.HULK, new AnimatedSprite(mG.Content.Load<Texture2D>("spirit_idle"), Vector2.Zero, 4),
+                        new AnimatedSprite(mG.Content.Load<Texture2D>("sayaka/sayaka_run"), Vector2.Zero, 1),
                         new AnimatedSprite(mG.Content.Load<Texture2D>("sayaka/sayaka_jump"), Vector2.Zero, 6),
                         new AnimatedSprite(mG.Content.Load<Texture2D>("sayaka/sayaka_fall"), Vector2.Zero, 3),
                         new AnimatedSprite(mG.Content.Load<Texture2D>("sayaka/sayaka_attack"), Vector2.Zero, 6));
@@ -63,8 +75,8 @@ namespace GameJamUtopiales
 
     public enum CharacterName
     {
-        MAMI,
-        SAYAKA
+        HUMAN,
+        HULK
     }
     public enum ForegroundItemName
     {

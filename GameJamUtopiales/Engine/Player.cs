@@ -33,34 +33,34 @@ namespace GameJamUtopiales
         public void Load(MainGame mG)
         {
             Factory factory = Factory.Instance;
-            this.human = factory.CreateCharacter(CharacterName.MAMI);
-            this.hulk = factory.CreateCharacter(CharacterName.SAYAKA);
-            //this.foetus = factory.CreateCharacter(CharacterName.MAMI);
-            //this.spirit = factory.CreateCharacter(CharacterName.MAMI);
+            this.human = factory.CreateCharacter(CharacterMetamorphose.HUMAN);
+            this.hulk = factory.CreateCharacter(CharacterMetamorphose.HULK);
+            this.foetus = factory.CreateCharacter(CharacterMetamorphose.FOETUS);
+            this.spirit = factory.CreateCharacter(CharacterMetamorphose.SPIRIT);
 
             CurrentPlayerCharacter = human;
         }
 
-        public void SwitchCharacter(CharacterStates newCharacter)
+        public void SwitchCharacter(CharacterMetamorphose newCharacter)
         {
             switch (newCharacter)
             {
-                case CharacterStates.HUMAN:
+                case CharacterMetamorphose.HUMAN:
                     human.CurrentPosition = CurrentPlayerCharacter.CurrentPosition;
                     human.CharacterFaces = CurrentPlayerCharacter.CharacterFaces;
                     this.CurrentPlayerCharacter = human;
                     break;
-                case CharacterStates.HULK:
+                case CharacterMetamorphose.HULK:
                     hulk.CurrentPosition = CurrentPlayerCharacter.CurrentPosition;
                     hulk.CharacterFaces = CurrentPlayerCharacter.CharacterFaces;
                     this.CurrentPlayerCharacter = hulk;
                     break;
-                case CharacterStates.FOETUS:
+                case CharacterMetamorphose.FOETUS:
                     foetus.CurrentPosition = CurrentPlayerCharacter.CurrentPosition;
                     foetus.CharacterFaces = CurrentPlayerCharacter.CharacterFaces;
                     this.CurrentPlayerCharacter = foetus;
                     break;
-                case CharacterStates.SPIRIT:
+                case CharacterMetamorphose.SPIRIT:
                     spirit.CurrentPosition = CurrentPlayerCharacter.CurrentPosition;
                     spirit.CharacterFaces = CurrentPlayerCharacter.CharacterFaces;
                     this.CurrentPlayerCharacter = spirit;
@@ -71,7 +71,7 @@ namespace GameJamUtopiales
         }
 
     }
-    public enum CharacterStates {
+    public enum CharacterMetamorphose {
         HUMAN,
         HULK,
         FOETUS,
