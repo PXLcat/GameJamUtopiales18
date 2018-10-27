@@ -11,6 +11,8 @@ namespace GameJamUtopiales
 {
     class MenuScene : Scene
     {
+        private DrawableImage fond;
+
         public MenuScene(MainGame mG) : base(mG) 
         {
 
@@ -18,8 +20,8 @@ namespace GameJamUtopiales
 
         public override void Load()
         {
-            Debug.WriteLine("Load Menu");
             base.Load();
+            fond = new DrawableImage(mainGame.Content.Load<Texture2D>("grid"), Vector2.Zero);
         }
 
         public override void Unload()

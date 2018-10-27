@@ -33,7 +33,7 @@ namespace GameJamUtopiales
             graphics.PreferredBackBufferHeight = 540;   // set this value to the desired height of your window
             graphics.ApplyChanges();
 
-            gameState.ChangeScene(Gamestate.SceneType.TEST); //La scène à lancer
+            gameState.ChangeScene(Gamestate.SceneType.MENU); //La scène à lancer
             base.Initialize();
         }
 
