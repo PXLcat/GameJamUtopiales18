@@ -20,7 +20,12 @@ namespace GameJamUtopiales
         private Character mami;
         private List<CollidableObject> listCollidable = new List<CollidableObject>();
 
+        int scrollX;
+        int scrollY;
+        int maxScrollX;
+        int maxScrollY;
         TmxMap map;
+
         Texture2D tileset;
         int tileWidth;
         int tileHeight;
@@ -51,13 +56,16 @@ namespace GameJamUtopiales
             tilesetColumns = tileset.Width / tileWidth;
             tilesetLines = tileset.Height / tileHeight;
 
+            maxScrollX = map.Width * tileWidth - windowWidth;
+            maxScrollY = map.Height * tileHeight - windowHeight;
+
             Debug.WriteLine("Load TestScene");
             consolas = mainGame.Content.Load<SpriteFont>("Consolas");
 
             mami = factory.CreateCharacter(CharacterName.MAMI);
             mami.CurrentPosition = new Vector2(100, 100);
             grid = new DrawableImage(mainGame.Content.Load<Texture2D>("grid"), Vector2.Zero);
-            listCollidable.Add(new CollidableObject(mainGame.Content.Load<Texture2D>("tileproto1"), new Vector2(100, 400)));
+            //listCollidable.Add(new CollidableObject(mainGame.Content.Load<Texture2D>("tileproto1"), new Vector2(100, 400)));
 
             barrel = new DrawableImage(mainGame.Content.Load<Texture2D>("barrel"), new Vector2(200, 200));
             base.Load();
@@ -73,13 +81,59 @@ namespace GameJamUtopiales
         {
             List<InputType> playerInputs = Input.DefineInputs(ref oldKbState);
             mami.Update(playerInputs, listCollidable);
+
+            Vector2 currentMamiPosition = mami.CurrentPosition;
+
+            // X Direction Scroll
+            scrollX -= (int)(windowWidth * 0.5f - currentMamiPosition.X);
+
+            if (scrollX < 0)
+            {
+                Console.WriteLine("Limit Scroll X LEFT");
+                scrollX = 0;
+            }
+            else if (scrollX > maxScrollX)
+            {
+                Console.WriteLine("Limit Scroll X RIGHT");
+                scrollX = maxScrollX;
+            }
+            else
+                currentMamiPosition.X = windowWidth * 0.5f;
+
+            // Y Direction Scroll
+            scrollY -= (int)(windowHeight * 0.5f - currentMamiPosition.Y);
+
+            if (scrollY < 0)
+            {
+                Console.WriteLine("Limit Scroll Y TOP");
+                scrollY = 0;
+            }
+            else if (scrollY > maxScrollY)
+            {
+                Console.WriteLine("Limit Scroll Y BOTTOM");
+                scrollY = maxScrollY;
+            }
+            else
+                currentMamiPosition.Y = windowHeight * 0.5f;
+
+            if (currentMamiPosition.X + mami.HitBox.Width * 0.5f >= windowWidth)
+            {
+                currentMamiPosition.X = (int)(windowWidth - mami.HitBox.Width * 0.5f);
+            }
+            else if (currentMamiPosition.X - mami.HitBox.Width * 0.5f <= 0)
+            {
+                currentMamiPosition.X = (int)(mami.HitBox.Width * 0.5f);
+            }
+
+            mami.CurrentPosition = currentMamiPosition;
+
             base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
             mainGame.spriteBatch.Begin();
-            grid.DrawTiled(mainGame.spriteBatch, windowWidth / grid.Texture.Width +1, windowHeight / grid.Texture.Height+1);
+            //grid.DrawTiled(mainGame.spriteBatch, windowWidth / grid.Texture.Width +1, windowHeight / grid.Texture.Height+1);
             mainGame.spriteBatch.DrawString(consolas, "test police", Vector2.Zero, Color.White);
 
             //tiledDraw
@@ -103,8 +157,8 @@ namespace GameJamUtopiales
                         int tilesetColumn = tileFrame % tilesetColumns;
                         int tilesetLine = (int)Math.Floor((double)tileFrame / (double)tilesetColumns);
 
-                        float x = column * tileWidth;
-                        float y = line * tileHeight;
+                        float x = column * tileWidth - scrollX;
+                        float y = line * tileHeight - scrollY;
 
                         Rectangle tilesetRec = new Rectangle(tileWidth * tilesetColumn, tileHeight * tilesetLine, tileWidth, tileHeight);
 
@@ -118,6 +172,7 @@ namespace GameJamUtopiales
                     }
                 }
             }
+            // tiledDraw END
 
             foreach (CollidableObject cObject in listCollidable)
             {

@@ -57,43 +57,20 @@ namespace GameJamUtopiales
             }
         }
 
-        private float runSpeed;
         private int jumpsDone; //remettre à private + tard
-        private float jumpInitPosY;
-        private int maxJumps;
 
         private float velocity;
         private float maxVelocity;
         private float gravity = 0.6f;
 
-        public int MaxJumps
-        {
-            get { return maxJumps; }
-            set { maxJumps = value; }
-        }
-        public float RunSpeed
-        {
-            get { return runSpeed; }
-            set { runSpeed = value; }
-        }
+        public int MaxJumps { get; set; }
+        public float RunSpeed { get; set; }
 
-        public Vector2 Movement
-        {
-            get { return movement; }
-            set { movement = value; }
-        }
-        public float JumpHeight
-        {
-            get { return jumpHeight; }
-            set { jumpHeight = value; }
-        }
+        public Vector2 Movement { get; set; }
+        public float JumpHeight { get; set; }
 
 
-        public float JumpInitPosY
-        {
-            get { return jumpInitPosY; }
-            set { jumpInitPosY = value; }
-        }
+        public float JumpInitPosY { get; set; }
 
         public Rectangle HitBox
         {
@@ -107,7 +84,7 @@ namespace GameJamUtopiales
 
 
         #region Methods
-        public Character(CharacterName characterName, AnimatedSprite spriteIdle, AnimatedSprite spriteRun, AnimatedSprite spriteJump, AnimatedSprite spriteFall, AnimatedSprite spriteAttack1, int jumpHeight = 120, int maxJumps = 2, float runSpeed = 2)
+        public Character(CharacterName characterName, AnimatedSprite spriteIdle, AnimatedSprite spriteRun, AnimatedSprite spriteJump, AnimatedSprite spriteFall, AnimatedSprite spriteAttack1, int jumpHeight = 120, int maxJumps = 2, float runSpeed = 5)
         {
             this.spriteIdle = spriteIdle;
             this.spriteRun = spriteRun;
@@ -115,12 +92,12 @@ namespace GameJamUtopiales
             this.spriteFall = spriteFall;
             this.spriteAttack1 = spriteAttack1;
 
-            this.jumpHeight = jumpHeight;
-            this.runSpeed = runSpeed;
+            JumpHeight = jumpHeight;
+            RunSpeed = runSpeed;
 
             this.CharacterName = characterName;
             this.CharacterState = State.IDLE;
-            this.maxJumps = maxJumps;
+            MaxJumps = maxJumps;
 
             this.maxVelocity = 20;
 
@@ -175,7 +152,7 @@ namespace GameJamUtopiales
             {
                 Debug.Write("Jumps done: " + jumpsDone);
 
-                if (jumpsDone < maxJumps)
+                if (jumpsDone < MaxJumps)
                 {
                     Jump();
                 }
@@ -235,7 +212,7 @@ namespace GameJamUtopiales
                 }
                 CharacterFaces = Facing.RIGHT;
 
-                this.Movement = new Vector2(this.Movement.X + runSpeed, this.Movement.Y);
+                this.Movement = new Vector2(this.Movement.X + RunSpeed, this.Movement.Y);
             }
         }
         private void MoveLeft()
@@ -247,7 +224,7 @@ namespace GameJamUtopiales
                     CharacterState = State.RUNNING;
                 }
                 CharacterFaces = Facing.LEFT;
-                this.Movement = new Vector2(this.Movement.X - runSpeed, this.Movement.Y);
+                this.Movement = new Vector2(this.Movement.X - RunSpeed, this.Movement.Y);
             }
         }
 
