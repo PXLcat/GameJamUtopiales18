@@ -51,6 +51,7 @@
     <Compile Include="Engine\ICollidable.cs" />
     <Compile Include="Engine\IDrawable.cs" />
     <Compile Include="Engine\Input.cs" />
+    <Compile Include="Engine\Map.cs" />
     <Compile Include="Engine\Utilities.cs" />
     <Compile Include="Gamecodeur\AssetManager.cs" />
     <Compile Include="Gamecodeur\GameState.cs" />
