@@ -258,7 +258,6 @@ namespace GameJamUtopiales
 
         public void ApplyGravity()
         {
-            //if(CharacterState == State.JUMPING || CharacterState == S)
             if (!isGrounded)
             {
                 if ((velocity + gravity) > maxVelocity)
@@ -276,7 +275,6 @@ namespace GameJamUtopiales
             {
                 CharacterState = State.FALLING;
             }
-            //Vector2 nextPosition = new Vector2(this.CurrentPosition.X + this.Movement.X, (this.CurrentPosition.Y + this.Movement.Y + velocity));
             Debug.WriteLine("velocity : " + velocity);
 
             this.Movement = new Vector2(this.Movement.X, (this.Movement.Y + velocity));
@@ -288,8 +286,10 @@ namespace GameJamUtopiales
         public void CheckCollisions(List<CollidableObject> collidableItems)
         {
 
-            Rectangle nextPosition = new Rectangle((int)(CurrentPosition.X + Movement.X), (int)(CurrentPosition.Y + Movement.Y),
+            Rectangle nextPosition = new Rectangle((int)(CurrentPosition.X + Movement.X),
+                ((int)(CurrentPosition.Y + Movement.Y)), //TODO MAL FOUTU
                 CurrentSprite.Texture.Width, CurrentSprite.Texture.Height); //TODO attention au check qui varie selon la taille du sprite!
+            //les deux derniers arguments varient selon l'origine
 
             //bool doReset = false;
             CollideType collision = new CollideType();
@@ -314,18 +314,14 @@ namespace GameJamUtopiales
 
 
             }
-            //if (doReset)
-            //{
-            //    ResetPose();
-            //    CurrentPosition = new Vector2((int)CurrentPosition.X, resetHeight );
-            //}
+
             if (collision.collideBottom)
             {
                 if (CharacterState == State.FALLING)
                 {
                     ResetPose();
                     Debug.WriteLine("collision sol");
-                    Movement = new Vector2(Movement.X, 0); //(Movement.X, 0+CurrentSprite.FrameHeight- collision.bottomCollisionDepth);
+                    Movement = new Vector2(Movement.X, 0);
                     isGrounded = true;
                 }
 
