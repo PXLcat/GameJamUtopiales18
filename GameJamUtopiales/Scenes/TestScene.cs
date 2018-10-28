@@ -17,7 +17,6 @@ namespace GameJamUtopiales
         private SpriteFont consolas;
         private DrawableImage grid;
         private DrawableImage barrel;
-        private Character mami;
         private List<CollidableObject> listCollidable = new List<CollidableObject>();
 
         public Map tiledMap = new Map();
@@ -36,14 +35,15 @@ namespace GameJamUtopiales
             Debug.WriteLine("Load TestScene");
             consolas = mainGame.Content.Load<SpriteFont>("Consolas");
 
-            mami = factory.CreateCharacter(CharacterName.MAMI);
-            mami.CurrentPosition = new Vector2(100, 100);
+            player.Load(mainGame);
+            player.CurrentPlayerCharacter.CurrentPosition = new Vector2(300, 300);
             grid = new DrawableImage(mainGame.Content.Load<Texture2D>("grid"), Vector2.Zero);
 
             //listCollidable.Add(new CollidableObject(mainGame.Content.Load<Texture2D>("tileproto1"), new Vector2(100, 400)));
 
             barrel = new DrawableImage(mainGame.Content.Load<Texture2D>("barrel"), new Vector2(200, 200));
             base.Load();
+            
         }
 
         public override void Unload()
@@ -57,8 +57,8 @@ namespace GameJamUtopiales
             List<InputType> playerInputs = Input.DefineInputs(ref oldKbState);
             
 
-            mami.Update(playerInputs, tiledMap);
-            tiledMap.Update(mami);
+            player.CurrentPlayerCharacter.Update(playerInputs, tiledMap);
+            tiledMap.Update(player.CurrentPlayerCharacter);
 
             base.Update(gameTime);
         }
@@ -75,7 +75,7 @@ namespace GameJamUtopiales
             //    cObject.Draw(mainGame.spriteBatch);
             //}
             barrel.Draw(mainGame.spriteBatch);
-            mami.Draw(mainGame.spriteBatch);
+            player.CurrentPlayerCharacter.Draw(mainGame.spriteBatch);
 
             mainGame.spriteBatch.DrawString(consolas, "test police", Vector2.Zero, Color.White);
             mainGame.spriteBatch.End();
