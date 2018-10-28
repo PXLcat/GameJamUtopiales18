@@ -15,8 +15,10 @@ namespace GameJamUtopiales
         int maxScrollX;
         int maxScrollY;
 
-        TmxMap map;
+
+        TmxMap mapData;
         public static Texture2D tileset;
+
         int tileWidth;
         int tileHeight;
         int mapWidth;
@@ -39,25 +41,25 @@ namespace GameJamUtopiales
 
         public void Load(MainGame mainGame, int pWindowWidth, int pWindowHeight)
         {
-            map = new TmxMap("Content/tiled.tmx");
-            tileset = mainGame.Content.Load<Texture2D>(map.Tilesets[0].Name.ToString());
+            mapData = new TmxMap("Content/tiled.tmx");
+            tileset = mainGame.Content.Load<Texture2D>(mapData.Tilesets[0].Name.ToString());
 
             windowWidth = pWindowWidth;
             windowHeight = pWindowHeight;
 
-            tileWidth = map.Tilesets[0].TileWidth;
-            tileHeight = map.Tilesets[0].TileHeight;
+            tileWidth = mapData.Tilesets[0].TileWidth;
+            tileHeight = mapData.Tilesets[0].TileHeight;
 
-            mapWidth = map.Width;
-            mapHeight = map.Height;
+            mapWidth = mapData.Width;
+            mapHeight = mapData.Height;
 
-            maxScrollX = map.Width * tileWidth - windowWidth;
-            maxScrollY = map.Height * tileHeight - windowHeight;
+            maxScrollX = mapData.Width * tileWidth - windowWidth;
+            maxScrollY = mapData.Height * tileHeight - windowHeight;
 
             tilesetColumns = tileset.Width / tileWidth;
             tilesetLines = tileset.Height / tileHeight;
 
-            Debug.Write(map.Layers.Count);
+            Debug.Write(mapData.Layers.Count);
 
             FillLayerPlayer();
 
@@ -67,9 +69,9 @@ namespace GameJamUtopiales
             int line=0;
             int column=0;
 
-            for (int i = 0; i < map.Layers[1].Tiles.Count; i++) //le layer Player correspond au 1
+            for (int i = 0; i < mapData.Layers[1].Tiles.Count; i++) //le layer Player correspond au 1
             {
-                int gid = map.Layers[1].Tiles[i].Gid;
+                int gid = mapData.Layers[1].Tiles[i].Gid;
                 TileType tileType = (TileType)gid;
 
                 if (gid != 0)
@@ -157,7 +159,7 @@ namespace GameJamUtopiales
             //    item.Draw(sb);
             //}
 
-            int nbLayers = map.Layers.Count;
+            int nbLayers = mapData.Layers.Count;
 
             int line;
             int column;
@@ -167,9 +169,9 @@ namespace GameJamUtopiales
                 line = 0;
                 column = 0;
 
-                for (int i = 0; i < map.Layers[nLayer].Tiles.Count; i++)
+                for (int i = 0; i < mapData.Layers[nLayer].Tiles.Count; i++)
                 {
-                    int gid = map.Layers[nLayer].Tiles[i].Gid;
+                    int gid = mapData.Layers[nLayer].Tiles[i].Gid;
 
                     if (gid != 0)
                     {
