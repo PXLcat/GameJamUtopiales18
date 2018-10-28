@@ -13,7 +13,8 @@ namespace GameJamUtopiales
             MENU,
             TEST,
             BATTLE,
-            GAMEOVER
+            GAMEOVER,
+            FIN
         }
 
         protected MainGame mainGame;
@@ -44,6 +45,9 @@ namespace GameJamUtopiales
                     //CurrentScene = new BattleScene(mainGame);
                     break;
                 case SceneType.GAMEOVER:
+                    break;
+                case SceneType.FIN:
+                    CurrentScene = new FinScene(mainGame);
                     break;
                 default:
                     break;

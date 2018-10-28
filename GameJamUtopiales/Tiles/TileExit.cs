@@ -7,23 +7,22 @@ using System.Threading.Tasks;
 
 namespace GameJamUtopiales
 {
-    public class TileExit
+    public class TileExit : ModelTile
     {
-        public class TileTransform : ModelTile
-        {
-            CharacterMetamorphose typeMetamorphose;
 
-            public TileTransform(Vector2 currentPosition, int width, int height, CharacterMetamorphose typeMetamorphose) : base(currentPosition, width, height)
+            CharacterMetamorphose typeMetamorphose;
+            MainGame mG;
+
+            public TileExit(Vector2 currentPosition, int width, int height, MainGame mG) : base(currentPosition, width, height)
             {
                 CurrentPosition = currentPosition;
                 traversable = true;
-                this.typeMetamorphose = typeMetamorphose;
             }
             public override void OnCollision(ICollidable other)
             {
-
+                mG.gameState.ChangeScene(Gamestate.SceneType.FIN);
             }
 
-        }
+
     }
 }

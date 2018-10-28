@@ -24,7 +24,7 @@ namespace GameJamUtopiales
         int maxScrollX;
         int maxScrollY;
 
-
+        MainGame mG;
 
 
         TmxMap mapData;
@@ -54,6 +54,7 @@ namespace GameJamUtopiales
 
         public void Load(MainGame mainGame, int pWindowWidth, int pWindowHeight)
         {
+            mG = mainGame;
             mapData = new TmxMap(mapName);
             tileset = mainGame.Content.Load<Texture2D>(mapData.Tilesets[0].Name.ToString());
 
@@ -209,6 +210,7 @@ namespace GameJamUtopiales
                             layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HULK));
                             break;
                         case TileType.EXIT1:
+                            layerPlayer.Add(new TileExit(new Vector2(x, y), tileWidth, tileWidth,mG));
                             break;
                         case TileType.EXIT2:
                             break;

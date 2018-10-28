@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static GameJamUtopiales.Gamestate;
 
 namespace GameJamUtopiales
 {
@@ -50,6 +51,10 @@ namespace GameJamUtopiales
         public virtual void Draw(GameTime gameTime)
         {
 
+        }
+        public void goToScene(MainGame mG,SceneType sT)
+        {
+            mG.gameState.ChangeScene(sT);
         }
     }
 }
