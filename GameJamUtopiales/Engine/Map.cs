@@ -41,7 +41,7 @@ namespace GameJamUtopiales
 
         public void Load(MainGame mainGame, int pWindowWidth, int pWindowHeight)
         {
-            mapData = new TmxMap("Content/tiled.tmx");
+            mapData = new TmxMap("Content/level1.tmx");
             tileset = mainGame.Content.Load<Texture2D>(mapData.Tilesets[0].Name.ToString());
 
             windowWidth = pWindowWidth;
@@ -69,9 +69,9 @@ namespace GameJamUtopiales
             int line=0;
             int column=0;
 
-            for (int i = 0; i < mapData.Layers[1].Tiles.Count; i++) //le layer Player correspond au 1
+            for (int i = 0; i < mapData.Layers[0].Tiles.Count; i++) //le layer Player correspond au 1
             {
-                int gid = mapData.Layers[1].Tiles[i].Gid;
+                int gid = mapData.Layers[0].Tiles[i].Gid;
                 TileType tileType = (TileType)gid;
 
                 if (gid != 0)
@@ -87,17 +87,19 @@ namespace GameJamUtopiales
 
                     switch (tileType)
                     {
-                        case TileType.NOTHING:
-                            break;
-                        case TileType.TERRE:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, tilesetRec));
-                            break;
-                        case TileType.EXIT:
-                            break;
-                        case TileType.PIEDESTAL:
-                            break;
-                        default:
-                            break;
+
+                        //case TileType.NOTHING:
+                        //    break;
+                        //case TileType.TERRE:
+                        //    layerPlayer.Add(new CollidableObject(new Vector2(x, y), tileWidth, tileWidth));
+                        //    break;
+                        //case TileType.EXIT:
+                        //    break;
+                        //case TileType.PIEDESTAL:
+                        //    break;
+                        //default:
+                        //    break;
+
                     }
 
                     
@@ -202,9 +204,71 @@ namespace GameJamUtopiales
     public enum TileType
     {
         NOTHING = 0,
-        TERRE = 1,
-        EXIT = 2,
-        PIEDESTAL = 3
-
+        GRASSCORNUPRIGHT = 1,
+        GRASSCORNUPLEFT = 2,
+        GROUNDCORNUPRIGHT = 3,
+        GROUNDCORNUPLEFT = 4,
+        GHOSTPARTICLE = 5,
+        GHOSTWALL = 6,
+        WALLRIGHT = 7,
+        WALLLEFT = 8,
+        UNDERGROUND = 9,
+        FLOOR = 10,
+        RONCEUP = 11,
+        RONCEDOWN = 12,
+        GRASSCORNDOWNRIGHT = 13,
+        GRASSCORNDOWNLEFT = 14,
+        GROUNDCORNDOWNRIGHT = 15,
+        GROUNDCORNDOWNLEFT = 16,
+        ROOF = 17,
+        BLANK1 = 18,
+        MUTH1 = 19,
+        MUTH2 = 20,
+        MUTB1 = 21,
+        MUTB2 = 22,
+        MUTF1 = 23,
+        MUTF2 = 24,
+        MUTH3 = 25,
+        MUTH4 = 26,
+        MUTB3 = 27,
+        MUTB4 = 28,
+        MUTF3 = 29,
+        MUTF4 = 30,
+        MUTH5 = 31,
+        MUTH6 = 32,
+        MUTB5 = 33,
+        MUTB6 = 34,
+        MUTF5 = 35,
+        MUTF6 = 36,
+        EXIT1 = 37,
+        EXIT2 = 38,
+        ROCK1 = 39,
+        ROCK2 = 40,
+        ROCK3 = 41,
+        UNDERGROUND2 = 42,
+        EXIT3 = 43,
+        EXIT4 = 44,
+        ROCK4 = 45,
+        ROCK5 = 46,
+        ROCK6 = 47,
+        UNDERGROUND3 = 48,
+        EXIT5 = 49,
+        EXIT6 = 50,
+        ROCK7 = 51,
+        ROCK8 = 52,
+        ROCK9 = 53,
+        BLANK2 = 54,
+        CANNONRIGHT1 = 55,
+        CANNONRIGHT2 = 56,
+        CORNERSINGLELEFT = 57,
+        CORNERSINGLERIGHT = 58,
+        CANNONLEFT1 = 59,
+        CANNONLEFT2 = 60,
+        CANNONRIGHT3 = 61,
+        CANNONRIGHT4 = 62,
+        BLANK3 = 63,
+        BLANK4 = 64,
+        CANNONLEFT3  = 65,
+        CANNONLEFT4 = 66
     }
 }
