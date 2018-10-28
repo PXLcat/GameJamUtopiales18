@@ -281,12 +281,18 @@ namespace GameJamUtopiales
 
                 collision = Utilities.CheckCollision(Player.Instance, cObject);
 
-                if (collision.collideBottom) {
-                    groundedHeight = cObject.HitBox.Top;
+                if (!isGrounded)
+                {
+                    if (collision.collideBottom)
+                    {
+                        groundedHeight = cObject.HitBox.Top;
 
-                    Movement = new Vector2(Movement.X, 0);
-                    ResetPose();
+                        Movement = new Vector2(Movement.X, 0);
+                        isGrounded = true;
+                        ResetPose();
+                    }
                 }
+
                 if (collision.collideLeft || collision.collideRight)
                 {
                     Movement = new Vector2(0, Movement.Y);
