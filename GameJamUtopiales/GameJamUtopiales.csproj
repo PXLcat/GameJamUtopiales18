@@ -54,6 +54,7 @@
     <Compile Include="Engine\Map.cs" />
     <Compile Include="Tiles\ModelTile.cs" />
     <Compile Include="Engine\Player.cs" />
+    <Compile Include="Tiles\TileExit.cs" />
     <Compile Include="Tiles\TileGround.cs" />
     <Compile Include="Engine\Utilities.cs" />
     <Compile Include="MainGame.cs" />

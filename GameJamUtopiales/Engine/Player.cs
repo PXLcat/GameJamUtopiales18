@@ -38,6 +38,7 @@ namespace GameJamUtopiales
             this.foetus = factory.CreateCharacter(CharacterMetamorphose.FOETUS);
             this.spirit = factory.CreateCharacter(CharacterMetamorphose.SPIRIT);
 
+
             CurrentPlayerCharacter = human;
         }
 

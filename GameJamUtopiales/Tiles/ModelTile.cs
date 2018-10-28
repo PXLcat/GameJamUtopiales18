@@ -38,7 +38,7 @@ namespace GameJamUtopiales
         }
 
         public void Update(int scrollX, int scrollY) {
-            CurrentPosition = new Vector2(BasePosition.X + scrollX, BasePosition.Y + scrollY);
+            CurrentPosition = new Vector2(BasePosition.X - scrollX, BasePosition.Y - scrollY);
         }
     }
 }
