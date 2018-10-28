@@ -34,6 +34,21 @@ namespace GameJamUtopiales
                 inputs.Add(InputType.ATTACK1);
                 Console.Write("input attack1 (space)");
             }
+            if (newKbState.IsKeyDown(Keys.Enter) && newKbState != oldKbState)
+            {
+                inputs.Add(InputType.START);
+                Console.Write("input start (enter)");
+            }
+            if (newKbState.IsKeyDown(Keys.Back) && newKbState != oldKbState)
+            {
+                inputs.Add(InputType.RETURNTOMENU);
+                Console.Write("input returntomenu (backspace)");
+            }
+            if (newKbState.IsKeyDown(Keys.H) && newKbState != oldKbState)
+            {
+                inputs.Add(InputType.CHEATCODE);
+                Console.Write("input cheatcode (h)");
+            }
 
             oldKbState = newKbState;
 
@@ -57,7 +72,10 @@ namespace GameJamUtopiales
         MOVE_LEFT,
         MOVE_RIGHT,
         JUMP, // fall n'est pas un "input"
-        ATTACK1
+        ATTACK1,
+        START,
+        RETURNTOMENU,
+        CHEATCODE
     }
     public enum InputMethod
     {

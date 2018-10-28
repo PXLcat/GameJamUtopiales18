@@ -12,6 +12,7 @@ namespace GameJamUtopiales
     class MenuScene : Scene
     {
         private DrawableImage fond;
+        public Gamestate gameState;
 
         public MenuScene(MainGame mG) : base(mG) 
         {
@@ -21,7 +22,7 @@ namespace GameJamUtopiales
         public override void Load()
         {
             base.Load();
-            fond = new DrawableImage(mainGame.Content.Load<Texture2D>("grid"), Vector2.Zero);
+            fond = new DrawableImage(mainGame.Content.Load<Texture2D>("titredeouf"), Vector2.Zero);
         }
 
         public override void Unload()
@@ -33,13 +34,20 @@ namespace GameJamUtopiales
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            List<InputType> playerInputs = Input.DefineInputs(ref oldKbState);
+
+            if (playerInputs.Contains(InputType.START))
+            {
+                gameState.ChangeScene(Gamestate.SceneType.TEST);
+            }
         }
 
         public override void Draw(GameTime gameTime)
         {
             mainGame.spriteBatch.Begin();
+            fond.Draw(mainGame.spriteBatch);
 
-            
             mainGame.spriteBatch.End();
 
             base.Draw(gameTime);

@@ -53,13 +53,6 @@
     <Compile Include="Engine\Input.cs" />
     <Compile Include="Engine\Map.cs" />
     <Compile Include="Engine\Utilities.cs" />
-    <Compile Include="Gamecodeur\AssetManager.cs" />
-    <Compile Include="Gamecodeur\GameState.cs" />
-    <Compile Include="Gamecodeur\GUI.cs" />
-    <Compile Include="Gamecodeur\IActor.cs" />
-    <Compile Include="Gamecodeur\Scene.cs" />
-    <Compile Include="Gamecodeur\Sprite.cs" />
-    <Compile Include="Gamecodeur\Util.cs" />
     <Compile Include="MainGame.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
