@@ -50,15 +50,15 @@ namespace GameJamUtopiales
                         new AnimatedSprite(mG.Content.Load<Texture2D>("animation/HULK_RUN"), Vector2.Zero, 4, framespeed: 4),
                         new AnimatedSprite(mG.Content.Load<Texture2D>("animation/HULK_JUMP"), Vector2.Zero, 1),
                         new AnimatedSprite(mG.Content.Load<Texture2D>("animation/HULK_JUMP"), Vector2.Zero, 1),
-                        new AnimatedSprite(mG.Content.Load<Texture2D>("human_idle"), Vector2.Zero, 1));
+                        new AnimatedSprite(mG.Content.Load<Texture2D>("animation/HULK_IDLE"), Vector2.Zero, 1));
                 case CharacterMetamorphose.FOETUS:
-                    return new Character(CharacterMetamorphose.HULK, new AnimatedSprite(mG.Content.Load<Texture2D>("animation/FOETUS_IDLE"), Vector2.Zero, 1),
+                    return new Character(CharacterMetamorphose.FOETUS, new AnimatedSprite(mG.Content.Load<Texture2D>("animation/FOETUS_IDLE"), Vector2.Zero, 1),
                         new AnimatedSprite(mG.Content.Load<Texture2D>("animation/FOETUS_RUN"), Vector2.Zero, 12, framespeed: 4),
-                        new AnimatedSprite(mG.Content.Load<Texture2D>("human_idle"), Vector2.Zero, 1),
-                        new AnimatedSprite(mG.Content.Load<Texture2D>("human_idle"), Vector2.Zero, 1),
-                        new AnimatedSprite(mG.Content.Load<Texture2D>("human_idle"), Vector2.Zero, 1));
+                        new AnimatedSprite(mG.Content.Load<Texture2D>("animation/FOETUS_IDLE"), Vector2.Zero, 1),
+                        new AnimatedSprite(mG.Content.Load<Texture2D>("animation/FOETUS_IDLE"), Vector2.Zero, 1),
+                        new AnimatedSprite(mG.Content.Load<Texture2D>("animation/FOETUS_IDLE"), Vector2.Zero, 1));
                 case CharacterMetamorphose.SPIRIT:
-                    return new Character(CharacterMetamorphose.HULK, new AnimatedSprite(mG.Content.Load<Texture2D>("animation/SPIRIT_IDLE"), Vector2.Zero, 4),
+                    return new Character(CharacterMetamorphose.SPIRIT, new AnimatedSprite(mG.Content.Load<Texture2D>("animation/SPIRIT_IDLE"), Vector2.Zero, 4),
                         new AnimatedSprite(mG.Content.Load<Texture2D>("animation/SPIRIT_IDLE"), Vector2.Zero, 4),
                         new AnimatedSprite(mG.Content.Load<Texture2D>("animation/SPIRIT_IDLE"), Vector2.Zero, 4),
                         new AnimatedSprite(mG.Content.Load<Texture2D>("animation/SPIRIT_IDLE"), Vector2.Zero, 4),

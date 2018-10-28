@@ -101,12 +101,14 @@ namespace GameJamUtopiales
 
             this.CharacterMetamorphose = characterName;
             this.CharacterState = State.IDLE;
+
             MaxJumps = maxJumps;
             if (CharacterMetamorphose == CharacterMetamorphose.SPIRIT)
             {
                 MaxJumps = 9999;
             }
-                this.maxVelocity = 20;
+
+            this.maxVelocity = 20;
 
             //this.InputMethod = InputMethod.FILE; //TODO !!
         }
@@ -128,10 +130,7 @@ namespace GameJamUtopiales
             }
             ContinueActions();
 
-            if (CharacterMetamorphose != CharacterMetamorphose.SPIRIT)
-            {
-                ApplyGravity();
-            }
+            ApplyGravity();
 
             CheckCollisions(currentMap);
 
