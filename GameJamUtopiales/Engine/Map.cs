@@ -85,24 +85,172 @@ namespace GameJamUtopiales
 
                     Rectangle tilesetRec = new Rectangle(tileWidth * tilesetColumn, tileHeight * tilesetLine, tileWidth, tileHeight);
 
+                    //case TileType.NOTHING:
+                    //    break;
+                    //case TileType.TERRE:
+                    //    layerPlayer.Add(new CollidableObject(new Vector2(x, y), tileWidth, tileWidth));
+                    //    break;
+                    //case TileType.EXIT:
+                    //    break;
+                    //case TileType.PIEDESTAL:
+                    //    break;
+                    //default:
+                    //    break;
+
                     switch (tileType)
                     {
-
-                        //case TileType.NOTHING:
-                        //    break;
-                        //case TileType.TERRE:
-                        //    layerPlayer.Add(new CollidableObject(new Vector2(x, y), tileWidth, tileWidth));
-                        //    break;
-                        //case TileType.EXIT:
-                        //    break;
-                        //case TileType.PIEDESTAL:
-                        //    break;
-                        //default:
-                        //    break;
-
+                        case TileType.NOTHING:
+                            break;
+                        case TileType.GRASSCORNUPRIGHT:
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            break;
+                        case TileType.GRASSCORNUPLEFT:
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            break;
+                        case TileType.GROUNDCORNUPRIGHT:
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            break;
+                        case TileType.GROUNDCORNUPLEFT:
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            break;
+                        case TileType.GHOSTPARTICLE:
+                            break;
+                        case TileType.GHOSTWALL:
+                            break;
+                        case TileType.WALLRIGHT:
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            break;
+                        case TileType.WALLLEFT:
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            break;
+                        case TileType.UNDERGROUND:
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            break;
+                        case TileType.FLOOR:
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            break;
+                        case TileType.RONCEUP:
+                            break;
+                        case TileType.RONCEDOWN:
+                            break;
+                        case TileType.GRASSCORNDOWNRIGHT:
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            break;
+                        case TileType.GRASSCORNDOWNLEFT:
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            break;
+                        case TileType.GROUNDCORNDOWNRIGHT:
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            break;
+                        case TileType.GROUNDCORNDOWNLEFT:
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            break;
+                        case TileType.ROOF:
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            break;
+                        case TileType.BLANK1:
+                            break;
+                        case TileType.MUTH1:
+                            break;
+                        case TileType.MUTH2:
+                            break;
+                        case TileType.MUTB1:
+                            break;
+                        case TileType.MUTB2:
+                            break;
+                        case TileType.MUTF1:
+                            break;
+                        case TileType.MUTF2:
+                            break;
+                        case TileType.MUTH3:
+                            break;
+                        case TileType.MUTH4:
+                            break;
+                        case TileType.MUTB3:
+                            break;
+                        case TileType.MUTB4:
+                            break;
+                        case TileType.MUTF3:
+                            break;
+                        case TileType.MUTF4:
+                            break;
+                        case TileType.MUTH5:
+                            break;
+                        case TileType.MUTH6:
+                            break;
+                        case TileType.MUTB5:
+                            break;
+                        case TileType.MUTB6:
+                            break;
+                        case TileType.MUTF5:
+                            break;
+                        case TileType.MUTF6:
+                            break;
+                        case TileType.EXIT1:
+                            break;
+                        case TileType.EXIT2:
+                            break;
+                        case TileType.ROCK1:
+                            break;
+                        case TileType.ROCK2:
+                            break;
+                        case TileType.ROCK3:
+                            break;
+                        case TileType.UNDERGROUND2:
+                            break;
+                        case TileType.EXIT3:
+                            break;
+                        case TileType.EXIT4:
+                            break;
+                        case TileType.ROCK4:
+                            break;
+                        case TileType.ROCK5:
+                            break;
+                        case TileType.ROCK6:
+                            break;
+                        case TileType.UNDERGROUND3:
+                            break;
+                        case TileType.EXIT5:
+                            break;
+                        case TileType.EXIT6:
+                            break;
+                        case TileType.ROCK7:
+                            break;
+                        case TileType.ROCK8:
+                            break;
+                        case TileType.ROCK9:
+                            break;
+                        case TileType.BLANK2:
+                            break;
+                        case TileType.CANNONRIGHT1:
+                            break;
+                        case TileType.CANNONRIGHT2:
+                            break;
+                        case TileType.CORNERSINGLELEFT:
+                            break;
+                        case TileType.CORNERSINGLERIGHT:
+                            break;
+                        case TileType.CANNONLEFT1:
+                            break;
+                        case TileType.CANNONLEFT2:
+                            break;
+                        case TileType.CANNONRIGHT3:
+                            break;
+                        case TileType.CANNONRIGHT4:
+                            break;
+                        case TileType.BLANK3:
+                            break;
+                        case TileType.BLANK4:
+                            break;
+                        case TileType.CANNONLEFT3:
+                            break;
+                        case TileType.CANNONLEFT4:
+                            break;
+                        default:
+                            break;
                     }
 
-                    
+
                 }
 
                 column++;

@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameJamUtopiales
 {
-    abstract public class ModelTile : ICollidable, IDrawable
+    abstract public class ModelTile : ICollidable
     {
         private Rectangle sourceRectangle;
         public bool traversable = false;
@@ -19,22 +19,20 @@ namespace GameJamUtopiales
         }
 
         public Vector2 CurrentPosition { get; set; }
-        public Texture2D Texture { get; set; }
 
         public virtual void OnCollision(ICollidable other)
         {
             
         }
 
-        public void Draw(SpriteBatch sb)
-        {
-            sb.Draw(Map.tileset, new Vector2(CurrentPosition.X, CurrentPosition.Y), sourceRectangle, Color.White);
-        }
+        //public void Draw(SpriteBatch sb)
+        //{
+        //    sb.Draw(Map.tileset, new Vector2(CurrentPosition.X, CurrentPosition.Y), sourceRectangle, Color.White);
+        //}
 
-        public ModelTile(Vector2 currentPosition, int width, int height, Rectangle sourceRectangle)
+        public ModelTile(Vector2 currentPosition, int width, int height)
         {
             CurrentPosition = currentPosition;
-            this.sourceRectangle = sourceRectangle;
         }
     }
 }

@@ -48,7 +48,7 @@ namespace GameJamUtopiales
                     //collision par le bas
                     result.collideBottom = true;
                     actor2.OnCollision(actor1.CurrentPlayerCharacter);
-                    //result.bottomCollisionDepth = actor1.Bottom - actor1.Top;
+                    result.bottomCollisionDepth = actor1.CurrentPlayerCharacter.HitBox.Bottom - actor2.HitBox.Top;
                 }
 
             }

@@ -16,7 +16,7 @@ namespace GameJamUtopiales
     {
         private SpriteFont consolas;
         private DrawableImage grid;
-        private DrawableImage barrel;
+
 
         public Map tiledMap = new Map();
 
@@ -38,9 +38,7 @@ namespace GameJamUtopiales
             player.CurrentPlayerCharacter.CurrentPosition = new Vector2(300, 300);
             grid = new DrawableImage(mainGame.Content.Load<Texture2D>("grid"), Vector2.Zero);
 
-            //listCollidable.Add(new CollidableObject(mainGame.Content.Load<Texture2D>("tileproto1"), new Vector2(100, 400)));
 
-            barrel = new DrawableImage(mainGame.Content.Load<Texture2D>("barrel"), new Vector2(200, 200));
             base.Load();
             
         }
@@ -69,7 +67,6 @@ namespace GameJamUtopiales
 
             tiledMap.Draw(mainGame.spriteBatch);
 
-            barrel.Draw(mainGame.spriteBatch);
             player.CurrentPlayerCharacter.Draw(mainGame.spriteBatch);
 
             mainGame.spriteBatch.DrawString(consolas, "test police", Vector2.Zero, Color.White);

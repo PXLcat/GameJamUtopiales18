@@ -277,11 +277,11 @@ namespace GameJamUtopiales
 
             CollideType collision = new CollideType();
 
-            
+
             foreach (ModelTile cObject in collidableItems)
             {
                 //est ce qu'on est au sol
-                
+
                 collision = Utilities.CheckCollision(Player.Instance, cObject);
 
                 if (collision.collideLeft || collision.collideRight)
@@ -304,44 +304,44 @@ namespace GameJamUtopiales
                 }
 
 
-                    //if (collision.collideBottom && !cObject.traversable)
-                    //{
-                    //    groundedHeight = cObject.HitBox.Top+1;
+                //if (collision.collideBottom && !cObject.traversable)
+                //{
+                //    groundedHeight = cObject.HitBox.Top+1;
 
-                    //    Movement = new Vector2(Movement.X, 0);
-                    //    if ((CharacterState == State.FALLING)&&!isGrounded)
-                    //    {
-                    //        doReset = true;
-                    //    }
-                    //    isGrounded = true;
+                //    Movement = new Vector2(Movement.X, 0);
+                //    if ((CharacterState == State.FALLING)&&!isGrounded)
+                //    {
+                //        doReset = true;
+                //    }
+                //    isGrounded = true;
 
-                    //}
-                    //else
-                    //{
-                    //    CharacterState = State.FALLING;
-                    //    isGrounded = false;
-                    //}
-
-
+                //}
+                //else
+                //{
+                //    CharacterState = State.FALLING;
+                //    isGrounded = false;
+                //}
 
 
-                    //}
 
-                    //if (doReset)
-                    //{
-                    //    ResetPose();
-                    //}
 
-                    //if (collision.collideLeft || collision.collideRight) //on devrait "coller" à l'objet qu'on percute
-                    //    //Movement = new Vector2(0, Movement.Y);
-                    //if (collision.collideTop || collision.collideBottom) 
-                    //    Movement = new Vector2(Movement.X, 0);
-                    //if ((CharacterState == State.FALLING) && collision.collideBottom)
-                    //{
-                    //    doReset = true;
-                    //    resetHeight = cObject.HitBox.Top - CurrentSprite.Texture.Height / 2;
-                    //}
-                }
+                //}
+
+                //if (doReset)
+                //{
+                //    ResetPose();
+                //}
+
+                //if (collision.collideLeft || collision.collideRight) //on devrait "coller" à l'objet qu'on percute
+                //    //Movement = new Vector2(0, Movement.Y);
+                //if (collision.collideTop || collision.collideBottom) 
+                //    Movement = new Vector2(Movement.X, 0);
+                //if ((CharacterState == State.FALLING) && collision.collideBottom)
+                //{
+                //    doReset = true;
+                //    resetHeight = cObject.HitBox.Top - CurrentSprite.Texture.Height / 2;
+                //}
+            }
 
 
             //if (collision.collideBottom)

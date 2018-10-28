@@ -10,7 +10,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GameJamUtopiales</RootNamespace>
-    <AssemblyName>GameJamUtopiales</AssemblyName>
+    <AssemblyName>Multimorphose</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
