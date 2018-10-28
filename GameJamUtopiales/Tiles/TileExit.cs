@@ -17,6 +17,7 @@ namespace GameJamUtopiales
             {
                 CurrentPosition = currentPosition;
                 traversable = true;
+                this.mG = mG;
             }
             public override void OnCollision(ICollidable other)
             {
