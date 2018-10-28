@@ -98,6 +98,7 @@
     <Content Include="Content\animation\HUMAN_JUMP.png" />
     <Content Include="Content\animation\HUMAN_RUN.png" />
     <Content Include="Content\animation\SPIRIT_IDLE.png" />
+    <Content Include="Content\FOND_EXPORT.png" />
     <Content Include="Content\tileproto.png" />
     <Content Include="Content\tileset.png" />
     <Content Include="Icon.ico" />
