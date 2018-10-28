@@ -89,6 +89,15 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\animation\FOETUS_IDLE.png" />
+    <Content Include="Content\animation\FOETUS_RUN.png" />
+    <Content Include="Content\animation\HULK_IDLE.png" />
+    <Content Include="Content\animation\HULK_JUMP.png" />
+    <Content Include="Content\animation\HULK_RUN.png" />
+    <Content Include="Content\animation\HUMAN_IDLE.png" />
+    <Content Include="Content\animation\HUMAN_JUMP.png" />
+    <Content Include="Content\animation\HUMAN_RUN.png" />
+    <Content Include="Content\animation\SPIRIT_IDLE.png" />
     <Content Include="Content\tileproto.png" />
     <Content Include="Icon.ico" />
     <Content Include="TiledSharp\zlib\License.txt" />
@@ -100,7 +109,13 @@
     </MonoGameContentReference>
     <None Include="app.config" />
     <None Include="app.manifest" />
+    <None Include="Content\level1.tmx" />
+    <None Include="Content\level2.tmx" />
+    <None Include="Content\level3.tmx">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Content\tiled.tmx">
+      <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Engine\Factory.json" />

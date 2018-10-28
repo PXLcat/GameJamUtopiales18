@@ -29,11 +29,11 @@ namespace GameJamUtopiales
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            //graphics.PreferredBackBufferWidth = 1920;  // set this value to the desired width of your window
-            //graphics.PreferredBackBufferHeight = 1080;   // set this value to the desired height of your window
+            graphics.PreferredBackBufferWidth = 1920;  // set this value to the desired width of your window
+            graphics.PreferredBackBufferHeight = 1080;   // set this value to the desired height of your window
             graphics.ApplyChanges();
 
-            gameState.ChangeScene(Gamestate.SceneType.TEST); //La scène à lancer
+            gameState.ChangeScene(Gamestate.SceneType.MENU); //La scène à lancer
             base.Initialize();
         }
 

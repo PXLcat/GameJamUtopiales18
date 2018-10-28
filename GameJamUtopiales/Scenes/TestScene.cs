@@ -55,6 +55,7 @@ namespace GameJamUtopiales
         public override void Update(GameTime gameTime)
         {
             List<InputType> playerInputs = Input.DefineInputs(ref oldKbState);
+            
 
             player.CurrentPlayerCharacter.Update(playerInputs, tiledMap);
             tiledMap.Update(player.CurrentPlayerCharacter);
