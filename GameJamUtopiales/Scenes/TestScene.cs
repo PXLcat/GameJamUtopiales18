@@ -20,7 +20,7 @@ namespace GameJamUtopiales
         private DrawableImage barrel;
         private List<CollidableObject> listCollidable = new List<CollidableObject>();
 
-        public Map tiledMap = new Map();
+        public Map tiledMap;
 
         public TestScene(MainGame mG) : base(mG)
         {
@@ -29,6 +29,7 @@ namespace GameJamUtopiales
 
         public override void Load()
         {
+            tiledMap = new Map("Content/level3.tmx");
             base.Load();
             fond = new DrawableImage(mainGame.Content.Load<Texture2D>("FOND_EXPORT"), new Vector2(960, 540));
             tiledMap.Load(mainGame, windowWidth, windowHeight);
