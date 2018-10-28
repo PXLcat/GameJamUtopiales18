@@ -29,11 +29,31 @@ namespace GameJamUtopiales
                 inputs.Add(InputType.JUMP);
                 Console.Write("input jump");
             }
-            if (newKbState.IsKeyDown(Keys.Space) && newKbState != oldKbState)
+            //if (newKbState.IsKeyDown(Keys.Space) && newKbState != oldKbState)
+            //{
+            //    inputs.Add(InputType.ATTACK1);
+            //    Console.Write("input attack1 (space)");
+            //}
+
+            //Tests métamorphoses
+            if (newKbState.IsKeyDown(Keys.NumPad1) && newKbState != oldKbState)
             {
-                inputs.Add(InputType.ATTACK1);
-                Console.Write("input attack1 (space)");
+                Player.Instance.SwitchCharacter(CharacterMetamorphose.HUMAN);
             }
+            if (newKbState.IsKeyDown(Keys.NumPad2) && newKbState != oldKbState)
+            {
+                Player.Instance.SwitchCharacter(CharacterMetamorphose.HULK);
+            }
+            if (newKbState.IsKeyDown(Keys.NumPad3) && newKbState != oldKbState)
+            {
+                Player.Instance.SwitchCharacter(CharacterMetamorphose.FOETUS);
+            }
+            if (newKbState.IsKeyDown(Keys.NumPad4) && newKbState != oldKbState)
+            {
+                Player.Instance.SwitchCharacter(CharacterMetamorphose.SPIRIT);
+            }
+            //____________________
+
 
             oldKbState = newKbState;
 
