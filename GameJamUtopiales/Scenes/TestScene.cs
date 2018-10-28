@@ -14,11 +14,12 @@ namespace GameJamUtopiales
 {
     class TestScene : Scene
     {
+        private DrawableImage fond;
         private SpriteFont consolas;
         private DrawableImage grid;
 
 
-        public Map tiledMap = new Map();
+        public Map tiledMap;
 
         public TestScene(MainGame mG) : base(mG)
         {
@@ -27,7 +28,9 @@ namespace GameJamUtopiales
 
         public override void Load()
         {
+            tiledMap = new Map("Content/level3.tmx");
             base.Load();
+            fond = new DrawableImage(mainGame.Content.Load<Texture2D>("FOND_EXPORT"), new Vector2(960, 540));
             tiledMap.Load(mainGame, windowWidth, windowHeight);
             // TODO: use this.Content to load your game content here
 
@@ -64,7 +67,7 @@ namespace GameJamUtopiales
         {
             mainGame.spriteBatch.Begin();
             //grid.DrawTiled(mainGame.spriteBatch, windowWidth / grid.Texture.Width +1, windowHeight / grid.Texture.Height+1);
-
+            fond.Draw(mainGame.spriteBatch);
             tiledMap.Draw(mainGame.spriteBatch);
 
             player.CurrentPlayerCharacter.Draw(mainGame.spriteBatch);

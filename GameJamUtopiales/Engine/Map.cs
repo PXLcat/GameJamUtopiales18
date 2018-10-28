@@ -12,6 +12,15 @@ namespace GameJamUtopiales
 {
     public class Map
     {
+        //les noms des maps sont :
+        /*
+         Content/level0.tmx
+         Content/level1.tmx
+         Content/level2.tmx
+         Content/level3.tmx
+         Content/level4.tmx
+             */
+
         int maxScrollX;
         int maxScrollY;
 
@@ -26,6 +35,8 @@ namespace GameJamUtopiales
         int tilesetLines;
         int tilesetColumns;
 
+        string mapName;
+
         int windowWidth;
         int windowHeight;
 
@@ -34,14 +45,14 @@ namespace GameJamUtopiales
 
         public List<ModelTile> layerPlayer = new List<ModelTile>(); //(ce qui est au même niveau que les Character avec lesquels y'a des collisions quoi)
 
-        public Map()
+        public Map(string mapchosen)
         {
-
+            mapName = mapchosen;
         }
 
         public void Load(MainGame mainGame, int pWindowWidth, int pWindowHeight)
         {
-            mapData = new TmxMap("Content/level1.tmx");
+            mapData = new TmxMap(mapName);
             tileset = mainGame.Content.Load<Texture2D>(mapData.Tilesets[0].Name.ToString());
 
             windowWidth = pWindowWidth;

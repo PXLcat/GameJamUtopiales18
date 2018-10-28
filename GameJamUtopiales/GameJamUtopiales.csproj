@@ -91,6 +91,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\animation\Animation_Mort_PNG.png" />
+    <Content Include="Content\animation\Animation_TransformationPNG.png" />
     <Content Include="Content\animation\FOETUS_IDLE.png" />
     <Content Include="Content\animation\FOETUS_RUN.png" />
     <Content Include="Content\animation\HULK_IDLE.png" />
@@ -100,6 +102,7 @@
     <Content Include="Content\animation\HUMAN_JUMP.png" />
     <Content Include="Content\animation\HUMAN_RUN.png" />
     <Content Include="Content\animation\SPIRIT_IDLE.png" />
+    <Content Include="Content\FOND_EXPORT.png" />
     <Content Include="Content\tileproto.png" />
     <Content Include="Content\tileset.png" />
     <Content Include="Icon.ico" />
@@ -112,6 +115,9 @@
     </MonoGameContentReference>
     <None Include="app.config" />
     <None Include="app.manifest" />
+    <None Include="Content\level0.tmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Content\level1.tmx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
