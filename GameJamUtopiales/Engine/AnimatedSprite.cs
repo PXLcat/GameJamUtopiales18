@@ -44,7 +44,7 @@ namespace GameJamUtopiales
         /// <summary>
         /// Millieu d'une frame
         /// </summary>
-        private Vector2 center;
+        public Vector2 center;
 
         private int currentFrame;
 
@@ -92,7 +92,6 @@ namespace GameJamUtopiales
         public override void Draw(SpriteBatch sb, bool horizontalFlip = false)
         {
             Rectangle sourceRectangle = new Rectangle(CurrentFrame * FrameWidth, 0, FrameWidth, FrameHeight);
-            Rectangle destinationRectangle = new Rectangle((int)CurrentPosition.X, ((int)CurrentPosition.Y), FrameWidth, FrameHeight);
             int layerDepth = 0; //TODO attention à layer depth, à ajouter comme para plus tard
 
 

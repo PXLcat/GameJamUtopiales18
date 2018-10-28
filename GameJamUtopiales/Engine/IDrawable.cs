@@ -11,6 +11,7 @@ namespace GameJamUtopiales
     public interface IDrawable
     {
         Vector2 CurrentPosition { get; set; }
+        Texture2D Texture { get; set; }
 
         void Draw(SpriteBatch sb);
     }

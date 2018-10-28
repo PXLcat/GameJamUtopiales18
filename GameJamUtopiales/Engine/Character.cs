@@ -74,7 +74,8 @@ namespace GameJamUtopiales
 
         public Rectangle HitBox
         {
-            get { return new Rectangle((int)CurrentPosition.X, (int)CurrentPosition.Y, CurrentSprite.FrameWidth, CurrentSprite.FrameHeight); } //TODO prendre en compte les Offset plus tard?
+            get { return new Rectangle((int)CurrentPosition.X- CurrentSprite.FrameWidth/2, (int)CurrentPosition.Y- CurrentSprite.FrameHeight,
+                CurrentSprite.FrameWidth, CurrentSprite.FrameHeight); } //TODO prendre en compte les Offset plus tard?
             set { hitBox = value; }
         }
 
@@ -230,7 +231,15 @@ namespace GameJamUtopiales
 
         public void Draw(SpriteBatch sb)
         {
+#if DEBUG
+            Rectangle sourceRectangle = new Rectangle(CurrentSprite.FrameWidth, 0, CurrentSprite.FrameWidth, CurrentSprite.FrameHeight);
+
+            Texture2D hitboxTexture = new Texture2D(sb.GraphicsDevice, 1, 1);
+            hitboxTexture.SetData(new[] { Color.Red });
+            sb.Draw(hitboxTexture, CurrentPosition, sourceRectangle, Color.White*0.5f, 0, CurrentSprite.center, 1, SpriteEffects.FlipHorizontally, 0);
+#endif
             CurrentSprite.Draw(sb, (CharacterFaces == Facing.LEFT));
+            
         }
 
         public void ApplyGravity()
@@ -262,54 +271,49 @@ namespace GameJamUtopiales
 
         public void CheckCollisions(Map currentMap)
         {
-            List<CollidableObject> collidableItems = currentMap.layerPlayer;
+            //List<CollidableObject> collidableItems = currentMap.layerPlayer;
 
-            Rectangle nextPosition = new Rectangle((int)(CurrentPosition.X + Movement.X),
-                ((int)(CurrentPosition.Y + Movement.Y)), //TODO MAL FOUTU
-                CurrentSprite.Texture.Width, CurrentSprite.Texture.Height); //TODO attention au check qui varie selon la taille du sprite!
-            //les deux derniers arguments varient selon l'origine
+            ////bool doReset = false;
+            //CollideType collision = new CollideType();
+            //CollidableObject tmpCollidableObject = new CollidableObject();
+            //foreach (CollidableObject cObject in collidableItems)
+            //{
+            //    //est ce qu'on est au sol
+            //    tmpCollidableObject.CurrentPosition = new Vector2(cObject.CurrentPosition.X + currentMap.ScrollX, cObject.CurrentPosition.Y + currentMap.ScrollY);
+            //    tmpCollidableObject.Width = cObject.Width;
+            //    tmpCollidableObject.Height = cObject.Height;
+            //    collision = Utilities.CheckCollision(nextPosition, tmpCollidableObject.HitBox);
 
-            //bool doReset = false;
-            CollideType collision = new CollideType();
-            CollidableObject tmpCollidableObject = new CollidableObject();
-            foreach (CollidableObject cObject in collidableItems)
-            {
-                //est ce qu'on est au sol
-                tmpCollidableObject.CurrentPosition = new Vector2(cObject.CurrentPosition.X + currentMap.ScrollX, cObject.CurrentPosition.Y + currentMap.ScrollY);
-                tmpCollidableObject.Width = cObject.Width;
-                tmpCollidableObject.Height = cObject.Height;
-                collision = Utilities.CheckCollision(nextPosition, tmpCollidableObject.HitBox);
-
-                if (collision.collideBottom)
-                    groundedHeight = tmpCollidableObject.HitBox.Top;
+            //    if (collision.collideBottom)
+            //        groundedHeight = tmpCollidableObject.HitBox.Top;
 
 
-                //if (collision.collideLeft || collision.collideRight) //on devrait "coller" à l'objet qu'on percute
-                //    //Movement = new Vector2(0, Movement.Y);
-                //if (collision.collideTop || collision.collideBottom) 
-                //    Movement = new Vector2(Movement.X, 0);
-                //if ((CharacterState == State.FALLING) && collision.collideBottom)
-                //{
-                //    doReset = true;
-                //    resetHeight = cObject.HitBox.Top - CurrentSprite.Texture.Height / 2;
-                //}
-            }
+            //    //if (collision.collideLeft || collision.collideRight) //on devrait "coller" à l'objet qu'on percute
+            //    //    //Movement = new Vector2(0, Movement.Y);
+            //    //if (collision.collideTop || collision.collideBottom) 
+            //    //    Movement = new Vector2(Movement.X, 0);
+            //    //if ((CharacterState == State.FALLING) && collision.collideBottom)
+            //    //{
+            //    //    doReset = true;
+            //    //    resetHeight = cObject.HitBox.Top - CurrentSprite.Texture.Height / 2;
+            //    //}
+            //}
 
-            if (collision.collideBottom)
-            {
-                if (CharacterState == State.FALLING)
-                {
-                    ResetPose();
-                    Debug.WriteLine("collision sol");
-                    Movement = new Vector2(Movement.X, 0);
-                    isGrounded = true;
-                }
+            //if (collision.collideBottom)
+            //{
+            //    if (CharacterState == State.FALLING)
+            //    {
+            //        ResetPose();
+            //        Debug.WriteLine("collision sol");
+            //        Movement = new Vector2(Movement.X, 0);
+            //        isGrounded = true;
+            //    }
 
-            }
-            else
-            {
-                isGrounded = false;
-            }
+            //}
+            //else
+            //{
+            //    isGrounded = false;
+            //}
 
         }
 
