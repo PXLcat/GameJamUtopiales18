@@ -57,6 +57,7 @@
     <Compile Include="MainGame.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scenes\FinScene.cs" />
     <Compile Include="Scenes\MenuScene.cs" />
     <Compile Include="Scenes\Scene.cs" />
     <Compile Include="Scenes\TestScene.cs" />
@@ -100,9 +101,12 @@
     <Content Include="Content\animation\HUMAN_JUMP.png" />
     <Content Include="Content\animation\HUMAN_RUN.png" />
     <Content Include="Content\animation\SPIRIT_IDLE.png" />
+    <Content Include="Content\fin_v0.png" />
     <Content Include="Content\FOND_EXPORT.png" />
     <Content Include="Content\tileproto.png" />
     <Content Include="Content\tileset.png" />
+    <Content Include="Content\tilesetV2.png" />
+    <Content Include="Content\titre_v0.png" />
     <Content Include="Icon.ico" />
     <Content Include="TiledSharp\zlib\License.txt" />
     <Content Include="TiledSharp\zlib\License.zlib.txt" />

@@ -164,6 +164,18 @@
 /processorParam:TextureFormat=Compressed
 /build:Consolas.spritefont
 
+#begin fin_v0.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:fin_v0.png
+
 #begin foetus_idle.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -403,6 +415,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:tilesetV2.png
+
+#begin titre_v0.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:titre_v0.png
 
 #begin titredeouf.png
 /importer:TextureImporter
