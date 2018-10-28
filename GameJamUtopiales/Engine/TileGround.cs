@@ -10,7 +10,7 @@ namespace GameJamUtopiales
     public class TileGround : ModelTile
     {
 
-        public TileGround(Vector2 currentPosition, int width, int height) : base(currentPosition, width, height)
+        public TileGround(Vector2 currentPosition, int width, int height, Rectangle sourceRectangle) : base(currentPosition, width, height, sourceRectangle)
         {
             CurrentPosition = currentPosition;
         }

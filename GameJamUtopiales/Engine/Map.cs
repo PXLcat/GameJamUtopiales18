@@ -16,7 +16,7 @@ namespace GameJamUtopiales
         int maxScrollY;
 
         TmxMap map;
-        Texture2D tileset;
+        public static Texture2D tileset;
         int tileWidth;
         int tileHeight;
         int mapWidth;
@@ -30,7 +30,7 @@ namespace GameJamUtopiales
         public int ScrollX { get; private set; }
         public int ScrollY { get; private set; }
 
-        public List<CollidableObject> layerPlayer = new List<CollidableObject>(); //(ce qui est au même niveau que les Character avec lesquels y'a des collisions quoi)
+        public List<ModelTile> layerPlayer = new List<ModelTile>(); //(ce qui est au même niveau que les Character avec lesquels y'a des collisions quoi)
 
         public Map()
         {
@@ -81,14 +81,14 @@ namespace GameJamUtopiales
                     float x = column * tileWidth;
                     float y = line * tileHeight;
 
-                    //Rectangle tilesetRec = new Rectangle(tileWidth * tilesetColumn, tileHeight * tilesetLine, tileWidth, tileHeight);
+                    Rectangle tilesetRec = new Rectangle(tileWidth * tilesetColumn, tileHeight * tilesetLine, tileWidth, tileHeight);
 
                     switch (tileType)
                     {
                         case TileType.NOTHING:
                             break;
                         case TileType.TERRE:
-                            layerPlayer.Add(new CollidableObject(new Vector2(x, y), tileWidth, tileWidth));
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, tilesetRec));
                             break;
                         case TileType.EXIT:
                             break;

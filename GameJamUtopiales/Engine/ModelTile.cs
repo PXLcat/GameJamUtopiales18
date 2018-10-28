@@ -10,13 +10,15 @@ namespace GameJamUtopiales
 {
     abstract public class ModelTile : ICollidable, IDrawable
     {
+        private Rectangle sourceRectangle;
+
         public Rectangle HitBox
         {
-            get => new Rectangle((int)CurrentPosition.X, (int)CurrentPosition.Y, Texture.Width, Texture.Height);
+            get => new Rectangle((int)CurrentPosition.X, (int)CurrentPosition.Y, 100, 100);//TODO
         }
 
-        public Vector2 CurrentPosition { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public Texture2D Texture { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Vector2 CurrentPosition { get; set; }
+        public Texture2D Texture { get; set; }
 
         public virtual void OnCollision(ICollidable other)
         {
@@ -25,12 +27,13 @@ namespace GameJamUtopiales
 
         public void Draw(SpriteBatch sb)
         {
-            throw new NotImplementedException();
+            sb.Draw(Map.tileset, new Vector2(CurrentPosition.X, CurrentPosition.Y), sourceRectangle, Color.White);
         }
 
-        public ModelTile(Vector2 currentPosition, int width, int height)
+        public ModelTile(Vector2 currentPosition, int width, int height, Rectangle sourceRectangle)
         {
             CurrentPosition = currentPosition;
+            this.sourceRectangle = sourceRectangle;
         }
     }
 }
