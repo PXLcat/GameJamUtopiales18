@@ -19,6 +19,7 @@ namespace GameJamUtopiales
         }
 
         public Vector2 CurrentPosition { get; set; }
+        public Vector2 BasePosition { get; set; }
 
         public virtual void OnCollision(ICollidable other)
         {
@@ -30,9 +31,14 @@ namespace GameJamUtopiales
         //    sb.Draw(Map.tileset, new Vector2(CurrentPosition.X, CurrentPosition.Y), sourceRectangle, Color.White);
         //}
 
-        public ModelTile(Vector2 currentPosition, int width, int height)
+        public ModelTile(Vector2 basePosition, int width, int height)
         {
-            CurrentPosition = currentPosition;
+            BasePosition = basePosition;
+            CurrentPosition = BasePosition;
+        }
+
+        public void Update(int scrollX, int scrollY) {
+            CurrentPosition = new Vector2(BasePosition.X + scrollX, BasePosition.Y + scrollY);
         }
     }
 }

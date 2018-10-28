@@ -81,6 +81,7 @@
     <Compile Include="TiledSharp\zlib\ZlibCodec.cs" />
     <Compile Include="TiledSharp\zlib\ZlibConstants.cs" />
     <Compile Include="TiledSharp\zlib\ZlibStream.cs" />
+    <Compile Include="Tiles\TileTransform.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

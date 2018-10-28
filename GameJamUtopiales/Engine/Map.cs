@@ -96,17 +96,6 @@ namespace GameJamUtopiales
 
                     Rectangle tilesetRec = new Rectangle(tileWidth * tilesetColumn, tileHeight * tilesetLine, tileWidth, tileHeight);
 
-                    //case TileType.NOTHING:
-                    //    break;
-                    //case TileType.TERRE:
-                    //    layerPlayer.Add(new CollidableObject(new Vector2(x, y), tileWidth, tileWidth));
-                    //    break;
-                    //case TileType.EXIT:
-                    //    break;
-                    //case TileType.PIEDESTAL:
-                    //    break;
-                    //default:
-                    //    break;
 
                     switch (tileType)
                     {
@@ -162,40 +151,58 @@ namespace GameJamUtopiales
                         case TileType.BLANK1:
                             break;
                         case TileType.MUTH1:
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HUMAN));
                             break;
                         case TileType.MUTH2:
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HUMAN));
                             break;
                         case TileType.MUTB1:
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.FOETUS));
                             break;
                         case TileType.MUTB2:
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.FOETUS));
                             break;
                         case TileType.MUTF1:
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HULK));
                             break;
                         case TileType.MUTF2:
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HULK));
                             break;
                         case TileType.MUTH3:
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HUMAN));
                             break;
                         case TileType.MUTH4:
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HUMAN));
                             break;
                         case TileType.MUTB3:
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.FOETUS));
                             break;
                         case TileType.MUTB4:
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.FOETUS));
                             break;
                         case TileType.MUTF3:
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HULK));
                             break;
                         case TileType.MUTF4:
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HULK));
                             break;
                         case TileType.MUTH5:
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HUMAN));
                             break;
                         case TileType.MUTH6:
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HUMAN));
                             break;
                         case TileType.MUTB5:
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.FOETUS));
                             break;
                         case TileType.MUTB6:
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.FOETUS));
                             break;
                         case TileType.MUTF5:
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HULK));
                             break;
                         case TileType.MUTF6:
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HULK));
                             break;
                         case TileType.EXIT1:
                             break;
@@ -208,6 +215,7 @@ namespace GameJamUtopiales
                         case TileType.ROCK3:
                             break;
                         case TileType.UNDERGROUND2:
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
                             break;
                         case TileType.EXIT3:
                             break;
@@ -220,6 +228,7 @@ namespace GameJamUtopiales
                         case TileType.ROCK6:
                             break;
                         case TileType.UNDERGROUND3:
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
                             break;
                         case TileType.EXIT5:
                             break;
@@ -238,8 +247,10 @@ namespace GameJamUtopiales
                         case TileType.CANNONRIGHT2:
                             break;
                         case TileType.CORNERSINGLELEFT:
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
                             break;
                         case TileType.CORNERSINGLERIGHT:
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
                             break;
                         case TileType.CANNONLEFT1:
                             break;
@@ -311,6 +322,11 @@ namespace GameJamUtopiales
                 currentMamiPosition.X = (int)(player.HitBox.Width * 0.5f);
 
             player.CurrentPosition = currentMamiPosition;
+
+            foreach (var item in layerPlayer)
+            {
+                item.Update(ScrollX, ScrollY);
+            }
         }
 
         public void Draw(SpriteBatch sb)
