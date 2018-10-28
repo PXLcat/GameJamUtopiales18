@@ -74,8 +74,11 @@ namespace GameJamUtopiales
 
         public Rectangle HitBox
         {
-            get { return new Rectangle((int)CurrentPosition.X- CurrentSprite.FrameWidth/2, (int)CurrentPosition.Y- CurrentSprite.FrameHeight,
-                CurrentSprite.FrameWidth, CurrentSprite.FrameHeight); } //TODO prendre en compte les Offset plus tard?
+            get
+            {
+                return new Rectangle((int)CurrentPosition.X - spriteIdle.FrameWidth / 2, (int)CurrentPosition.Y - spriteIdle.FrameHeight,
+              spriteIdle.FrameWidth, spriteIdle.FrameHeight);
+            } //TODO prendre en compte les Offset plus tard?
         }
 
         public Texture2D Texture { get => CurrentSprite.Texture; set => throw new Exception("La texture d'un sprite ne peut être modifiée directement"); }
@@ -189,7 +192,8 @@ namespace GameJamUtopiales
 
         }
 
-        private void Jump() {
+        private void Jump()
+        {
             this.JumpInitPosY = this.CurrentPosition.Y;
 
             jumpsDone++;
@@ -235,10 +239,10 @@ namespace GameJamUtopiales
 
             Texture2D hitboxTexture = new Texture2D(sb.GraphicsDevice, 1, 1);
             hitboxTexture.SetData(new[] { Color.Red });
-            sb.Draw(hitboxTexture, CurrentPosition, sourceRectangle, Color.White*0.5f, 0, CurrentSprite.center, 1, SpriteEffects.FlipHorizontally, 0);
+            sb.Draw(hitboxTexture, CurrentPosition, sourceRectangle, Color.White * 0.5f, 0, CurrentSprite.center, 1, SpriteEffects.FlipHorizontally, 0);
 #endif
             CurrentSprite.Draw(sb, (CharacterFaces == Facing.LEFT));
-            
+
         }
 
         public void ApplyGravity()
@@ -275,23 +279,23 @@ namespace GameJamUtopiales
             bool doReset = false;
             CollideType collision = new CollideType();
 
+            
             foreach (ModelTile cObject in collidableItems)
             {
                 //est ce qu'on est au sol
-
+                
                 collision = Utilities.CheckCollision(Player.Instance, cObject);
 
-                if (!isGrounded)
-                {
-                    if (collision.collideBottom)
-                    {
-                        groundedHeight = cObject.HitBox.Top;
 
-                        Movement = new Vector2(Movement.X, 0);
-                        isGrounded = true;
-                        ResetPose();
-                    }
+                if (collision.collideBottom)
+                {
+                    groundedHeight = cObject.HitBox.Top;
+
+                    Movement = new Vector2(Movement.X, 0);
+                    isGrounded = true;
+                    
                 }
+
 
                 if (collision.collideLeft || collision.collideRight)
                 {
@@ -307,6 +311,10 @@ namespace GameJamUtopiales
                 //    doReset = true;
                 //    resetHeight = cObject.HitBox.Top - CurrentSprite.Texture.Height / 2;
                 //}
+            }
+            if (isGrounded && CharacterState == State.FALLING)
+            {
+                ResetPose();
             }
 
             //if (collision.collideBottom)
