@@ -284,24 +284,24 @@ namespace GameJamUtopiales
                 
                 collision = Utilities.CheckCollision(Player.Instance, cObject);
 
-                if (collision.collideBottom && !cObject.traversable)
-                {
-                    if (CharacterState == State.FALLING)
-                    {
-
-                        ResetPose();
-                        jumpsDone = 0;
-                    }
-                    this.Movement = new Vector2(this.Movement.X, 0);
-                    this.CurrentPosition = new Vector2(this.CurrentPosition.X + this.Movement.X, (cObject.HitBox.Top));
-                }
                 if (collision.collideLeft || collision.collideRight)
                 {
                     if (!cObject.traversable)
                     {
                         Movement = new Vector2(0, Movement.Y);
                     }
-                
+
+                }
+                if (collision.collideBottom && !cObject.traversable)
+                {
+                    if (CharacterState == State.FALLING)
+                    {
+                        ResetPose();
+                        jumpsDone = 0;
+                    }
+                    this.Movement = new Vector2(this.Movement.X, 0);
+                    this.CurrentPosition = new Vector2(this.CurrentPosition.X + this.Movement.X, (cObject.HitBox.Top));
+                }
 
 
                     //if (collision.collideBottom && !cObject.traversable)
