@@ -132,8 +132,10 @@ namespace GameJamUtopiales
                             layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
                             break;
                         case TileType.RONCEUP:
+                            layerPlayer.Add(new TileRonces(new Vector2(x, y), tileWidth, tileWidth));
                             break;
                         case TileType.RONCEDOWN:
+                            layerPlayer.Add(new TileRonces(new Vector2(x, y), tileWidth, tileWidth));
                             break;
                         case TileType.GRASSCORNDOWNRIGHT:
                             layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
