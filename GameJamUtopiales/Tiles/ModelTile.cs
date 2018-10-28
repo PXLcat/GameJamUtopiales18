@@ -11,6 +11,7 @@ namespace GameJamUtopiales
     abstract public class ModelTile : ICollidable, IDrawable
     {
         private Rectangle sourceRectangle;
+        public bool traversable = false;
 
         public Rectangle HitBox
         {

@@ -52,9 +52,9 @@
     <Compile Include="Engine\IDrawable.cs" />
     <Compile Include="Engine\Input.cs" />
     <Compile Include="Engine\Map.cs" />
-    <Compile Include="Engine\ModelTile.cs" />
+    <Compile Include="Tiles\ModelTile.cs" />
     <Compile Include="Engine\Player.cs" />
-    <Compile Include="Engine\TileGround.cs" />
+    <Compile Include="Tiles\TileGround.cs" />
     <Compile Include="Engine\Utilities.cs" />
     <Compile Include="MainGame.cs" />
     <Compile Include="Program.cs" />

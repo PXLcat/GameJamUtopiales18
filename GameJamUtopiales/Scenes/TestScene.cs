@@ -17,7 +17,6 @@ namespace GameJamUtopiales
         private SpriteFont consolas;
         private DrawableImage grid;
         private DrawableImage barrel;
-        private List<CollidableObject> listCollidable = new List<CollidableObject>();
 
         public Map tiledMap = new Map();
 
@@ -70,10 +69,6 @@ namespace GameJamUtopiales
 
             tiledMap.Draw(mainGame.spriteBatch);
 
-            //foreach (CollidableObject cObject in listCollidable)
-            //{
-            //    cObject.Draw(mainGame.spriteBatch);
-            //}
             barrel.Draw(mainGame.spriteBatch);
             player.CurrentPlayerCharacter.Draw(mainGame.spriteBatch);
 

@@ -9,10 +9,10 @@ namespace GameJamUtopiales
 {
     public class TileGround : ModelTile
     {
-
         public TileGround(Vector2 currentPosition, int width, int height, Rectangle sourceRectangle) : base(currentPosition, width, height, sourceRectangle)
         {
             CurrentPosition = currentPosition;
+            traversable = false;
         }
         public override void OnCollision(ICollidable other)
         {

@@ -59,7 +59,7 @@ namespace GameJamUtopiales
 
         private int jumpsDone; //remettre à private + tard
 
-        private float velocity;
+        private float velocityY;
         private float maxVelocity;
         private float gravity = 0.6f;
 
@@ -120,9 +120,10 @@ namespace GameJamUtopiales
             }
             else if (CharacterState == State.RUNNING)
             {
-                ResetPose();
+                CharacterState = State.IDLE;
             }
             ContinueActions();
+
             ApplyGravity();
             CheckCollisions(currentMap);
 
@@ -164,7 +165,7 @@ namespace GameJamUtopiales
             }
             if (inputs.Contains(InputType.MOVE_LEFT) && (inputs.Contains(InputType.MOVE_RIGHT)))
             {
-                ResetPose();
+                //ResetPose();
             }
             else if (inputs.Contains(InputType.MOVE_LEFT) && (!inputs.Contains(InputType.MOVE_RIGHT)))
             {
@@ -202,8 +203,7 @@ namespace GameJamUtopiales
             isGrounded = false;
             spriteJump.CurrentFrame = 0;
 
-
-            velocity = -12; //TODO externaliser
+            velocityY = -12; //TODO externaliser
         }
 
         private void MoveRight()
@@ -247,26 +247,25 @@ namespace GameJamUtopiales
 
         public void ApplyGravity()
         {
-            if (!isGrounded)
             {
-                if ((velocity + gravity) > maxVelocity)
+                if ((velocityY + gravity) > maxVelocity)
                 {
-                    velocity = maxVelocity;
+                    velocityY = maxVelocity;
                 }
                 else
                 {
-                    velocity += gravity;
+                    velocityY += gravity;
                 }
             }
 
 
-            if (velocity > 0)
+            if (velocityY > 1.2f) //!
             {
                 CharacterState = State.FALLING;
             }
-            Debug.WriteLine("velocity : " + velocity);
+            Debug.WriteLine("velocity : " + velocityY);
 
-            this.Movement = new Vector2(this.Movement.X, (this.Movement.Y + velocity));
+            this.Movement = new Vector2(this.Movement.X, (this.Movement.Y + velocityY));
 
 
 
@@ -276,7 +275,6 @@ namespace GameJamUtopiales
         {
             List<ModelTile> collidableItems = currentMap.layerPlayer;
 
-            bool doReset = false;
             CollideType collision = new CollideType();
 
             
@@ -286,36 +284,65 @@ namespace GameJamUtopiales
                 
                 collision = Utilities.CheckCollision(Player.Instance, cObject);
 
-
-                if (collision.collideBottom)
+                if (collision.collideBottom && !cObject.traversable)
                 {
-                    groundedHeight = cObject.HitBox.Top;
+                    if (CharacterState == State.FALLING)
+                    {
 
-                    Movement = new Vector2(Movement.X, 0);
-                    isGrounded = true;
-                    
+                        ResetPose();
+                        jumpsDone = 0;
+                    }
+                    this.Movement = new Vector2(this.Movement.X, 0);
+                    this.CurrentPosition = new Vector2(this.CurrentPosition.X + this.Movement.X, (cObject.HitBox.Top));
                 }
-
-
                 if (collision.collideLeft || collision.collideRight)
                 {
-                    Movement = new Vector2(0, Movement.Y);
+                    if (!cObject.traversable)
+                    {
+                        Movement = new Vector2(0, Movement.Y);
+                    }
+                
+
+
+                    //if (collision.collideBottom && !cObject.traversable)
+                    //{
+                    //    groundedHeight = cObject.HitBox.Top+1;
+
+                    //    Movement = new Vector2(Movement.X, 0);
+                    //    if ((CharacterState == State.FALLING)&&!isGrounded)
+                    //    {
+                    //        doReset = true;
+                    //    }
+                    //    isGrounded = true;
+
+                    //}
+                    //else
+                    //{
+                    //    CharacterState = State.FALLING;
+                    //    isGrounded = false;
+                    //}
+
+
+
+
+                    //}
+
+                    //if (doReset)
+                    //{
+                    //    ResetPose();
+                    //}
+
+                    //if (collision.collideLeft || collision.collideRight) //on devrait "coller" à l'objet qu'on percute
+                    //    //Movement = new Vector2(0, Movement.Y);
+                    //if (collision.collideTop || collision.collideBottom) 
+                    //    Movement = new Vector2(Movement.X, 0);
+                    //if ((CharacterState == State.FALLING) && collision.collideBottom)
+                    //{
+                    //    doReset = true;
+                    //    resetHeight = cObject.HitBox.Top - CurrentSprite.Texture.Height / 2;
+                    //}
                 }
 
-                //if (collision.collideLeft || collision.collideRight) //on devrait "coller" à l'objet qu'on percute
-                //    //Movement = new Vector2(0, Movement.Y);
-                //if (collision.collideTop || collision.collideBottom) 
-                //    Movement = new Vector2(Movement.X, 0);
-                //if ((CharacterState == State.FALLING) && collision.collideBottom)
-                //{
-                //    doReset = true;
-                //    resetHeight = cObject.HitBox.Top - CurrentSprite.Texture.Height / 2;
-                //}
-            }
-            if (isGrounded && CharacterState == State.FALLING)
-            {
-                ResetPose();
-            }
 
             //if (collision.collideBottom)
             //{
@@ -343,8 +370,7 @@ namespace GameJamUtopiales
             //TODO eventarg pour qu'à chaque changement de currentSprite, la position se mette à jour toute seule?
             CharacterState = State.IDLE;
             jumpsDone = 0;
-            velocity = 0;
-            CurrentPosition = new Vector2((int)CurrentPosition.X, groundedHeight);
+            velocityY = 0;
         }
 
         public void OnCollision(ICollidable other)
