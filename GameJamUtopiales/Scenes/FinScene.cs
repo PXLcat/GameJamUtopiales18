@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace GameJamUtopiales
 {
-    class MenuScene : Scene
+    class FinScene : Scene
     {
         private DrawableImage fond;
 
-        public MenuScene(MainGame mG) : base(mG) 
+        public FinScene(MainGame mG) : base(mG) 
         {
 
         }
@@ -21,7 +21,7 @@ namespace GameJamUtopiales
         public override void Load()
         {
             base.Load();
-            fond = new DrawableImage(mainGame.Content.Load<Texture2D>("titre_v0"), new Vector2(960,540));
+            fond = new DrawableImage(mainGame.Content.Load<Texture2D>("fin_v0"), new Vector2(960,540));
         }
 
         public override void Unload()
