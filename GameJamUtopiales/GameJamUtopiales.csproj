@@ -99,6 +99,7 @@
     <Content Include="Content\animation\HUMAN_RUN.png" />
     <Content Include="Content\animation\SPIRIT_IDLE.png" />
     <Content Include="Content\tileproto.png" />
+    <Content Include="Content\tileset.png" />
     <Content Include="Icon.ico" />
     <Content Include="TiledSharp\zlib\License.txt" />
     <Content Include="TiledSharp\zlib\License.zlib.txt" />
@@ -109,10 +110,18 @@
     </MonoGameContentReference>
     <None Include="app.config" />
     <None Include="app.manifest" />
-    <None Include="Content\level1.tmx" />
-    <None Include="Content\level2.tmx" />
+    <None Include="Content\level1.tmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\level2.tmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Content\level3.tmx">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\level4.tmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Content\tiled.tmx">
       <SubType>Designer</SubType>
