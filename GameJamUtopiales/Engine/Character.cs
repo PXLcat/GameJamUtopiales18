@@ -23,6 +23,7 @@ namespace GameJamUtopiales
         public Facing CharacterFaces;
         private Rectangle hitBox;
 
+
         private InputMethod inputMethod;
 
         public InputMethod InputMethod
@@ -101,8 +102,11 @@ namespace GameJamUtopiales
             this.CharacterMetamorphose = characterName;
             this.CharacterState = State.IDLE;
             MaxJumps = maxJumps;
-
-            this.maxVelocity = 20;
+            if (CharacterMetamorphose == CharacterMetamorphose.SPIRIT)
+            {
+                MaxJumps = 9999;
+            }
+                this.maxVelocity = 20;
 
             //this.InputMethod = InputMethod.FILE; //TODO !!
         }
@@ -124,7 +128,11 @@ namespace GameJamUtopiales
             }
             ContinueActions();
 
-            ApplyGravity();
+            if (CharacterMetamorphose != CharacterMetamorphose.SPIRIT)
+            {
+                ApplyGravity();
+            }
+
             CheckCollisions(currentMap);
 
             CurrentPosition += Movement;
@@ -195,15 +203,19 @@ namespace GameJamUtopiales
 
         private void Jump()
         {
-            this.JumpInitPosY = this.CurrentPosition.Y;
+            if (CharacterMetamorphose != CharacterMetamorphose.FOETUS)
+            {
+                this.JumpInitPosY = this.CurrentPosition.Y;
 
-            jumpsDone++;
+                jumpsDone++;
 
-            CharacterState = State.JUMPING;
-            isGrounded = false;
-            spriteJump.CurrentFrame = 0;
+                CharacterState = State.JUMPING;
+                isGrounded = false;
+                spriteJump.CurrentFrame = 0;
 
-            velocityY = -12; //TODO externaliser
+                velocityY = -12; //TODO externaliser
+            }
+
         }
 
         private void MoveRight()
