@@ -89,6 +89,15 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\animation\FOETUS_IDLE.png" />
+    <Content Include="Content\animation\FOETUS_RUN.png" />
+    <Content Include="Content\animation\HULK_IDLE.png" />
+    <Content Include="Content\animation\HULK_JUMP.png" />
+    <Content Include="Content\animation\HULK_RUN.png" />
+    <Content Include="Content\animation\HUMAN_IDLE.png" />
+    <Content Include="Content\animation\HUMAN_JUMP.png" />
+    <Content Include="Content\animation\HUMAN_RUN.png" />
+    <Content Include="Content\animation\SPIRIT_IDLE.png" />
     <Content Include="Content\tileproto.png" />
     <Content Include="Icon.ico" />
     <Content Include="TiledSharp\zlib\License.txt" />
