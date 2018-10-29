@@ -15,8 +15,6 @@ namespace GameJamUtopiales
         public CharacterMetamorphose CharacterMetamorphose;
         protected AnimatedSprite spriteIdle, spriteRun, spriteJump, spriteFall, spriteAttack1;
 
-        private Vector2 movement; //new Vector2(déplacement horizontal, déplacement vertical)
-
         private float jumpHeight;
 
         public State CharacterState;
@@ -137,7 +135,7 @@ namespace GameJamUtopiales
             CurrentPosition += Movement;
             if (isGrounded)
             {
-                CurrentPosition = new Vector2(CurrentPosition.X, groundedHeight);
+                CurrentPosition = new Vector2(CurrentPosition.X, groundedHeight-1);
             }
             CurrentSprite.CurrentPosition = CurrentPosition; //TODO redondant avec la ligne précédente; faire un eventHandler pour qu'à chaque
             CurrentSprite.Update();                             //changement de sprite, la position se màj automatiquement par rapport à CharaPosition?
@@ -270,7 +268,7 @@ namespace GameJamUtopiales
             }
 
 
-            if (velocityY > 1.2f) //!
+            if (velocityY > 1.2f) //!TODO
             {
                 CharacterState = State.FALLING;
             }
@@ -286,24 +284,32 @@ namespace GameJamUtopiales
         {
             List<ModelTile> collidableItems = currentMap.layerPlayer;
 
-            CollideType collision = new CollideType();
+            CollideType PlayerCollision = new CollideType(); 
 
 
             foreach (ModelTile cObject in collidableItems)
             {
                 //est ce qu'on est au sol
 
-                collision = Utilities.CheckCollision(Player.Instance, cObject);
+                CollideType byObjectCollision = Utilities.CheckCollision(Player.Instance, cObject);
 
-                if (collision.collideLeft || collision.collideRight)
+                if (byObjectCollision.collideLeft)
                 {
                     if (!cObject.traversable)
                     {
-                        Movement = new Vector2(0, Movement.Y);
+                        PlayerCollision.collideLeft = true;
+                    }
+                    
+                }
+                if (byObjectCollision.collideRight)
+                {
+                    if (!cObject.traversable)
+                    {
+                        PlayerCollision.collideRight = true;
                     }
 
                 }
-                if (collision.collideBottom && !cObject.traversable)
+                if (byObjectCollision.collideBottom && !cObject.traversable)
                 {
                     if (CharacterState == State.FALLING)
                     {
@@ -312,64 +318,18 @@ namespace GameJamUtopiales
                     }
                     this.Movement = new Vector2(this.Movement.X, 0);
                     this.CurrentPosition = new Vector2(this.CurrentPosition.X + this.Movement.X, (cObject.HitBox.Top));
+                    PlayerCollision.bottomCollisionDepth = byObjectCollision.bottomCollisionDepth;
                 }
-
-
-                //if (collision.collideBottom && !cObject.traversable)
-                //{
-                //    groundedHeight = cObject.HitBox.Top+1;
-
-                //    Movement = new Vector2(Movement.X, 0);
-                //    if ((CharacterState == State.FALLING)&&!isGrounded)
-                //    {
-                //        doReset = true;
-                //    }
-                //    isGrounded = true;
-
-                //}
-                //else
-                //{
-                //    CharacterState = State.FALLING;
-                //    isGrounded = false;
-                //}
-
-
-
-
-                //}
-
-                //if (doReset)
-                //{
-                //    ResetPose();
-                //}
-
-                //if (collision.collideLeft || collision.collideRight) //on devrait "coller" à l'objet qu'on percute
-                //    //Movement = new Vector2(0, Movement.Y);
-                //if (collision.collideTop || collision.collideBottom) 
-                //    Movement = new Vector2(Movement.X, 0);
-                //if ((CharacterState == State.FALLING) && collision.collideBottom)
-                //{
-                //    doReset = true;
-                //    resetHeight = cObject.HitBox.Top - CurrentSprite.Texture.Height / 2;
-                //}
+                
+ 
             }
 
+            Debug.WriteLine(collision.ToString());
+            if (PlayerCollision.collideLeft||PlayerCollision.collideRight)
+            {
 
-            //if (collision.collideBottom)
-            //{
-            //    if (CharacterState == State.FALLING)
-            //    {
-            //        ResetPose();
-            //        Debug.WriteLine("collision sol");
-            //        Movement = new Vector2(Movement.X, 0);
-            //        isGrounded = true;
-            //    }
-
-            //}
-            //else
-            //{
-            //    isGrounded = false;
-            //}
+            }
+            Movement = new Vector2(0, Movement.Y);
 
         }
 

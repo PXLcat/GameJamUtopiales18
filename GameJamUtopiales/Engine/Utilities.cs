@@ -76,7 +76,35 @@ namespace GameJamUtopiales
             this.collideBottom = collideDown;
         }
 
-
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            if (collideLeft||collideRight||collideTop||collideBottom)
+            {
+                sb.Append("Collisions: ");
+                if (collideLeft)
+                {
+                    sb.Append("left ");
+                }
+                if (collideRight)
+                {
+                    sb.Append("right ");
+                }
+                if (collideTop)
+                {
+                    sb.Append("top ");
+                }
+                if (collideBottom)
+                {
+                    sb.Append("bottom");
+                }
+            }
+            else
+            {
+                sb.Append("No collision");
+            }
+            return sb.ToString();
+        }
 
     }
 }
