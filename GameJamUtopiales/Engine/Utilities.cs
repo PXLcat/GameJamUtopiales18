@@ -45,7 +45,7 @@ namespace GameJamUtopiales
             {
                 if (actor1.CurrentPlayerCharacter.HitBox.Left > actor2.HitBox.Right)
                 {
-                    //collision par la gauche
+                    //collision par la gauche du perso
                     result.collideLeft = true;
                     actor2.OnCollision(actor1.CurrentPlayerCharacter);
                     //result.leftCollisionDepth = actor1.Left - actor1.Right;

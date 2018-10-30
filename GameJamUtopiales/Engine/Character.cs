@@ -197,7 +197,14 @@ namespace GameJamUtopiales
 
         private void Jump()
         {
-            if (CharacterMetamorphose != CharacterMetamorphose.FOETUS)
+            if (CharacterMetamorphose == CharacterMetamorphose.SPIRIT)
+            {
+
+                isGrounded = false;
+
+                velocityY = -5; //TODO externaliser
+            }
+            else if (CharacterMetamorphose != CharacterMetamorphose.FOETUS)
             {
                 this.JumpInitPosY = this.CurrentPosition.Y;
 
@@ -209,6 +216,7 @@ namespace GameJamUtopiales
 
                 velocityY = -12; //TODO externaliser
             }
+
 
         }
 
@@ -253,7 +261,8 @@ namespace GameJamUtopiales
 
         public void ApplyGravity()
         {
-            {
+            if(CharacterMetamorphose!= CharacterMetamorphose.SPIRIT){
+                //CharacterMetamorphose.
                 if ((velocityY + gravity) > maxVelocity)
                 {
                     velocityY = maxVelocity;
@@ -262,13 +271,23 @@ namespace GameJamUtopiales
                 {
                     velocityY += gravity;
                 }
-            }
 
-
-            if (velocityY > 1.2f) //!TODO
-            {
+                if (velocityY > 1.2f) //!TODO
+                {
                 CharacterState = State.FALLING;
+                }
+                
             }
+            else
+            {
+                                   if ((velocityY + gravity) > maxVelocity)
+                {
+                    velocityY = maxVelocity;
+                } 
+            }
+
+
+
             Debug.WriteLine("velocity : " + velocityY);
 
             this.Movement = new Vector2(this.Movement.X, (this.Movement.Y + velocityY));
@@ -295,6 +314,7 @@ namespace GameJamUtopiales
                     if (!cObject.traversable)
                     {
                         PlayerCollision.collideLeft = true;
+                        //this.CurrentPosition = new Vector2(cObject.HitBox.Right,this.CurrentPosition.X);
                     }
                     
                 }
@@ -342,6 +362,7 @@ namespace GameJamUtopiales
             if (PlayerCollision.collideLeft||PlayerCollision.collideRight)
             {
                 Movement = new Vector2(0, Movement.Y);
+                
             }
             
 
