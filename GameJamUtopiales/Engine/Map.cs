@@ -383,6 +383,14 @@ namespace GameJamUtopiales
     public class Tile {
 
     }
+    public enum Level
+    {
+        ONE,
+        TWO,
+        THREE,
+        FOUR,
+        FIVE
+    }
     public enum TileType
     {
         NOTHING = 0,

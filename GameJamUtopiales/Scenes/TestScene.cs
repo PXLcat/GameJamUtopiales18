@@ -15,10 +15,6 @@ namespace GameJamUtopiales
     class TestScene : Scene
     {
         private DrawableImage fond;
-        private SpriteFont consolas;
-        private DrawableImage grid;
-
-
         public Map tiledMap;
 
         public TestScene(MainGame mG) : base(mG)
@@ -35,11 +31,9 @@ namespace GameJamUtopiales
             // TODO: use this.Content to load your game content here
 
             Debug.WriteLine("Load TestScene");
-            consolas = mainGame.Content.Load<SpriteFont>("Consolas");
 
             player.Load(mainGame);
-            player.CurrentPlayerCharacter.CurrentPosition = new Vector2(300, 300);
-            grid = new DrawableImage(mainGame.Content.Load<Texture2D>("grid"), Vector2.Zero);
+            player.CurrentPlayerCharacter.CurrentPosition = new Vector2(200, 600);
 
 
             base.Load();
@@ -72,7 +66,6 @@ namespace GameJamUtopiales
 
             player.CurrentPlayerCharacter.Draw(mainGame.spriteBatch);
 
-            mainGame.spriteBatch.DrawString(consolas, "test police", Vector2.Zero, Color.White);
             mainGame.spriteBatch.End();
 
             base.Draw(gameTime);

@@ -52,6 +52,7 @@
     <Compile Include="Engine\IDrawable.cs" />
     <Compile Include="Engine\Input.cs" />
     <Compile Include="Engine\Map.cs" />
+    <Compile Include="Scenes\Level1.cs" />
     <Compile Include="Tiles\ModelTile.cs" />
     <Compile Include="Engine\Player.cs" />
     <Compile Include="Tiles\TileExit.cs" />
@@ -110,7 +111,6 @@
     <Content Include="Content\fin_v0.png" />
     <Content Include="Content\FOND_EXPORT.png" />
     <Content Include="Content\tileproto.png" />
-    <Content Include="Content\tileset.png" />
     <Content Include="Content\tilesetV2.png" />
     <Content Include="Content\titre_v0.png" />
     <Content Include="Icon.ico" />
