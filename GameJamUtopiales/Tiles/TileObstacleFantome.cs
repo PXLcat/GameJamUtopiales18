@@ -1,22 +1,23 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace GameJamUtopiales
 {
-    public class TileRonces : ModelTile
+    public class TileObstacleFantome : ModelTile
     {
-        public TileRonces(Vector2 currentPosition, int width, int height) : base(currentPosition, width, height)
+        public TileObstacleFantome(Vector2 currentPosition, int width, int height) : base(currentPosition, width, height)
         {
             CurrentPosition = currentPosition;
             traversablePourHumain = false;
         }
         public override void OnCollision(ICollidable other)
         {
-            Player.Instance.SwitchCharacter(CharacterMetamorphose.SPIRIT);
+            Debug.WriteLine("Tile mur fantôme");
         }
     }
 }

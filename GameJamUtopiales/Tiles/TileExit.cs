@@ -16,7 +16,7 @@ namespace GameJamUtopiales
             public TileExit(Vector2 currentPosition, int width, int height, MainGame mG) : base(currentPosition, width, height)
             {
                 CurrentPosition = currentPosition;
-                traversable = true;
+                traversablePourHumain = true;
                 this.mG = mG;
             }
             public override void OnCollision(ICollidable other)

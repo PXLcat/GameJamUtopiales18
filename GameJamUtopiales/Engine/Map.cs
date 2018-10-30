@@ -119,6 +119,7 @@ namespace GameJamUtopiales
                         case TileType.GHOSTPARTICLE:
                             break;
                         case TileType.GHOSTWALL:
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
                             break;
                         case TileType.WALLRIGHT:
                             layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));

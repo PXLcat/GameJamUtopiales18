@@ -29,6 +29,17 @@ namespace GameJamUtopiales
                 inputs.Add(InputType.JUMP);
                 Console.Write("input jump");
             }
+            if (newKbState.IsKeyDown(Keys.Up)) //TODO valable que pour des input uniques
+            { //mettre à part les conditions à rallonge?
+                inputs.Add(InputType.FLYUP);
+                Console.Write("input fly");
+            }
+            if (newKbState.IsKeyDown(Keys.Down)) //TODO valable que pour des input uniques
+            { //mettre à part les conditions à rallonge?
+                inputs.Add(InputType.FLYDOWN);
+                Console.Write("input fly");
+            }
+
             //if (newKbState.IsKeyDown(Keys.Space) && newKbState != oldKbState)
             //{
             //    inputs.Add(InputType.ATTACK1);
@@ -98,7 +109,9 @@ namespace GameJamUtopiales
         ATTACK1,
         START,
         RETURNTOMENU,
-        CHEATCODE
+        CHEATCODE,
+        FLYUP,
+        FLYDOWN
     }
     public enum InputMethod
     {

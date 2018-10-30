@@ -14,7 +14,8 @@ namespace GameJamUtopiales
         public TileTransform(Vector2 currentPosition, int width, int height, CharacterMetamorphose typeMetamorphose) : base(currentPosition, width, height)
         {
             CurrentPosition = currentPosition;
-            traversable = true;
+            traversablePourHumain = true;
+            traversablePourFantome = true;
             this.typeMetamorphose = typeMetamorphose;
         }
         public override void OnCollision(ICollidable other)

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace GameJamUtopiales
@@ -12,7 +9,7 @@ namespace GameJamUtopiales
     public class Character : IDrawable, ICollidable
     {
 
-        public CharacterMetamorphose CharacterMetamorphose;
+        public CharacterMetamorphose characterMetamorphose;
         protected AnimatedSprite spriteIdle, spriteRun, spriteJump, spriteFall, spriteAttack1;
 
         private float jumpHeight;
@@ -97,16 +94,12 @@ namespace GameJamUtopiales
             JumpHeight = jumpHeight;
             RunSpeed = runSpeed;
 
-            this.CharacterMetamorphose = characterName;
+            this.characterMetamorphose = characterName;
             this.CharacterState = State.IDLE;
 
             MaxJumps = maxJumps;
-            if (CharacterMetamorphose == CharacterMetamorphose.SPIRIT)
-            {
-                MaxJumps = 9999;
-            }
 
-            this.maxVelocity = 20;
+            this.maxVelocity = 15;
 
             //this.InputMethod = InputMethod.FILE; //TODO !!
         }
@@ -141,14 +134,14 @@ namespace GameJamUtopiales
 
         private void ContinueActions()
         {
-            if (CharacterState == State.ATTACKING1)
-            {
-                if (spriteAttack1.FirstLoopDone)
-                {
-                    ResetPose();
-                    spriteAttack1.FirstLoopDone = false;
-                }
-            }
+            //if (CharacterState == State.ATTACKING1)
+            //{
+            //    if (spriteAttack1.FirstLoopDone)
+            //    {
+            //        ResetPose();
+            //        spriteAttack1.FirstLoopDone = false;
+            //    }
+            //}
         }
 
         private void SortAndExecuteInput(List<InputType> inputs)
@@ -177,17 +170,32 @@ namespace GameJamUtopiales
             {
                 MoveRight();
             }
-            else if (inputs.Contains(InputType.ATTACK1))
+            if (inputs.Contains(InputType.FLYUP))
             {
-                if ((CharacterState != State.JUMPING) && (CharacterState != State.FALLING))
-                {
-                    Attack1();
-                }
-
+                FlyUp();
             }
+            else if (inputs.Contains(InputType.FLYDOWN))
+            {
+                FlyDown();
+            }
+            //else if (inputs.Contains(InputType.ATTACK1))
+            //{
+            //    if ((CharacterState != State.JUMPING) && (CharacterState != State.FALLING))
+            //    {
+            //        Attack1();
+            //    }
+
+            //}
         }
 
-
+        private void FlyUp()
+        {
+            this.Movement = new Vector2(this.Movement.X, this.Movement.Y - RunSpeed);
+        }
+        private void FlyDown()
+        {
+            this.Movement = new Vector2(this.Movement.X, this.Movement.Y  +RunSpeed);
+        }
 
         private void Attack1() //attaque au sol //TODO comment externaliser les attaques?
         {
@@ -197,14 +205,9 @@ namespace GameJamUtopiales
 
         private void Jump()
         {
-            if (CharacterMetamorphose == CharacterMetamorphose.SPIRIT)
-            {
 
-                isGrounded = false;
-
-                velocityY = -5; //TODO externaliser
-            }
-            else if (CharacterMetamorphose != CharacterMetamorphose.FOETUS)
+            if ((characterMetamorphose != CharacterMetamorphose.FOETUS)
+                && (characterMetamorphose != CharacterMetamorphose.FOETUS))
             {
                 this.JumpInitPosY = this.CurrentPosition.Y;
 
@@ -261,7 +264,8 @@ namespace GameJamUtopiales
 
         public void ApplyGravity()
         {
-            if(CharacterMetamorphose!= CharacterMetamorphose.SPIRIT){
+            if (characterMetamorphose != CharacterMetamorphose.SPIRIT)
+            {
                 //CharacterMetamorphose.
                 if ((velocityY + gravity) > maxVelocity)
                 {
@@ -272,18 +276,18 @@ namespace GameJamUtopiales
                     velocityY += gravity;
                 }
 
-                if (velocityY > 1.2f) //!TODO
-                {
-                CharacterState = State.FALLING;
-                }
-                
+                //if (velocityY > 1.2f) //!TODO
+                //{
+                //    CharacterState = State.FALLING;
+                //}
+
             }
             else
             {
-                                   if ((velocityY + gravity) > maxVelocity)
+                if ((velocityY + gravity) > maxVelocity)
                 {
                     velocityY = maxVelocity;
-                } 
+                }
             }
 
 
@@ -291,7 +295,10 @@ namespace GameJamUtopiales
             Debug.WriteLine("velocity : " + velocityY);
 
             this.Movement = new Vector2(this.Movement.X, (this.Movement.Y + velocityY));
-
+            if (characterMetamorphose == CharacterMetamorphose.SPIRIT)
+            {
+                velocityY = 0;
+            }
 
 
         }
@@ -311,22 +318,30 @@ namespace GameJamUtopiales
 
                 if (byObjectCollision.collideLeft)
                 {
-                    if (!cObject.traversable)
+                    if (!cObject.traversablePourHumain)
                     {
                         PlayerCollision.collideLeft = true;
                         //this.CurrentPosition = new Vector2(cObject.HitBox.Right,this.CurrentPosition.X);
                     }
-                    
+                    if (!cObject.traversablePourFantome && characterMetamorphose==CharacterMetamorphose.SPIRIT )
+                    {
+                        PlayerCollision.collideLeft = true;
+                    }
+
                 }
                 if (byObjectCollision.collideRight)
                 {
-                    if (!cObject.traversable)
+                    if (!cObject.traversablePourHumain)
+                    {
+                        PlayerCollision.collideRight = true;
+                    }
+                    if (!cObject.traversablePourFantome && characterMetamorphose == CharacterMetamorphose.SPIRIT)
                     {
                         PlayerCollision.collideRight = true;
                     }
 
                 }
-                if (byObjectCollision.collideBottom && !cObject.traversable)
+                if (byObjectCollision.collideBottom && !cObject.traversablePourHumain)
                 {
                     PlayerCollision.collideBottom = true;
                     PlayerCollision.bottomCollisionDepth = byObjectCollision.bottomCollisionDepth;
@@ -335,36 +350,58 @@ namespace GameJamUtopiales
 
 
                 }
-                
- 
+
+
             }
 
             Debug.WriteLine(PlayerCollision.ToString());
 
             if (PlayerCollision.collideBottom)
             {
-                if (this.Movement.X>0)
+                if (this.Movement.Y > 0)
                 {
                     this.Movement = new Vector2(this.Movement.X, 0);
                 }
 
                 if (PlayerCollision.bottomCollisionDepth > 1)
                 {
-                    if (CharacterState == State.FALLING) //
-                    {
-                        ResetPose();
-                        jumpsDone = 0;
-                    }
-                    this.CurrentPosition = new Vector2(this.CurrentPosition.X + this.Movement.X,HitBoxTopPlusOne);
+                    //if (CharacterState == State.FALLING) //
+                    //{
+                    //    ResetPose();
+                    //    jumpsDone = 0;
+                    //}
+                    ResetPose();
+                    this.CurrentPosition = new Vector2(this.CurrentPosition.X + this.Movement.X, HitBoxTopPlusOne);
+                    
+                }
+                else if (PlayerCollision.bottomCollisionDepth == 1)
+                {
+                    //ResetPose();
+                }
+            }
+            else
+            {
+                CharacterState = State.FALLING;
+            }
+
+            if (PlayerCollision.collideLeft)
+            {
+                if (Movement.X<0)
+                {
+                    Movement = new Vector2(0, Movement.Y);
+
+                }
+                
+
+            }
+            if (PlayerCollision.collideRight)
+            {
+                if (Movement.X > 0)
+                {
+                    Movement = new Vector2(0, Movement.Y);
                 }
             }
 
-            if (PlayerCollision.collideLeft||PlayerCollision.collideRight)
-            {
-                Movement = new Vector2(0, Movement.Y);
-                
-            }
-            
 
         }
 
@@ -381,7 +418,7 @@ namespace GameJamUtopiales
 
         public void OnCollision(ICollidable other)
         {
-            Debug.Write("Collision entre " + this.CharacterMetamorphose + " et " + other.ToString());
+            Debug.Write("Collision entre " + this.characterMetamorphose + " et " + other.ToString());
         }
 
 

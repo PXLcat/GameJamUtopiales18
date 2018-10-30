@@ -12,7 +12,7 @@ namespace GameJamUtopiales
         public TileGround(Vector2 currentPosition, int width, int height) : base(currentPosition, width, height)
         {
             CurrentPosition = currentPosition;
-            traversable = false;
+            traversablePourHumain = false;
         }
         public override void OnCollision(ICollidable other)
         {

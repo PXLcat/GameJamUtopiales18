@@ -43,14 +43,16 @@ namespace GameJamUtopiales
 
             if (horizontalCollisions.Intersects(actor2.HitBox))
             {
-                if (actor1.CurrentPlayerCharacter.HitBox.Left > actor2.HitBox.Right)
+                if (actor1.CurrentPlayerCharacter.HitBox.Left < actor2.HitBox.Right &&
+                    actor1.CurrentPlayerCharacter.HitBox.Left > actor2.HitBox.Left)
                 {
                     //collision par la gauche du perso
                     result.collideLeft = true;
                     actor2.OnCollision(actor1.CurrentPlayerCharacter);
                     //result.leftCollisionDepth = actor1.Left - actor1.Right;
                 }
-                if (actor1.CurrentPlayerCharacter.HitBox.Right > actor2.HitBox.Left)
+                if (actor1.CurrentPlayerCharacter.HitBox.Right > actor2.HitBox.Left &&
+                    actor1.CurrentPlayerCharacter.HitBox.Right < actor2.HitBox.Right)
                 {
                     //collision par la droite
                     result.collideRight = true;
