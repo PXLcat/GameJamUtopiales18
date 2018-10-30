@@ -133,10 +133,7 @@ namespace GameJamUtopiales
             CheckCollisions(currentMap);
 
             CurrentPosition += Movement;
-            if (isGrounded)
-            {
-                CurrentPosition = new Vector2(CurrentPosition.X, groundedHeight-1);
-            }
+
             CurrentSprite.CurrentPosition = CurrentPosition; //TODO redondant avec la ligne précédente; faire un eventHandler pour qu'à chaque
             CurrentSprite.Update();                             //changement de sprite, la position se màj automatiquement par rapport à CharaPosition?
         }
@@ -284,9 +281,9 @@ namespace GameJamUtopiales
         {
             List<ModelTile> collidableItems = currentMap.layerPlayer;
 
-            CollideType PlayerCollision = new CollideType(); 
+            CollideType PlayerCollision = new CollideType();
 
-
+            int HitBoxTopPlusOne = 100; //!
             foreach (ModelTile cObject in collidableItems)
             {
                 //est ce qu'on est au sol
@@ -311,25 +308,42 @@ namespace GameJamUtopiales
                 }
                 if (byObjectCollision.collideBottom && !cObject.traversable)
                 {
-                    if (CharacterState == State.FALLING)
-                    {
-                        ResetPose();
-                        jumpsDone = 0;
-                    }
-                    this.Movement = new Vector2(this.Movement.X, 0);
-                    this.CurrentPosition = new Vector2(this.CurrentPosition.X + this.Movement.X, (cObject.HitBox.Top));
+                    PlayerCollision.collideBottom = true;
                     PlayerCollision.bottomCollisionDepth = byObjectCollision.bottomCollisionDepth;
+                    HitBoxTopPlusOne = cObject.HitBox.Top + 1;
+
+
+
                 }
                 
  
             }
 
-            Debug.WriteLine(collision.ToString());
+            Debug.WriteLine(PlayerCollision.ToString());
+
+            if (PlayerCollision.collideBottom)
+            {
+                if (this.Movement.X>0)
+                {
+                    this.Movement = new Vector2(this.Movement.X, 0);
+                }
+
+                if (PlayerCollision.bottomCollisionDepth > 1)
+                {
+                    if (CharacterState == State.FALLING) //
+                    {
+                        ResetPose();
+                        jumpsDone = 0;
+                    }
+                    this.CurrentPosition = new Vector2(this.CurrentPosition.X + this.Movement.X,HitBoxTopPlusOne);
+                }
+            }
+
             if (PlayerCollision.collideLeft||PlayerCollision.collideRight)
             {
-
+                Movement = new Vector2(0, Movement.Y);
             }
-            Movement = new Vector2(0, Movement.Y);
+            
 
         }
 
@@ -341,7 +355,7 @@ namespace GameJamUtopiales
             //TODO eventarg pour qu'à chaque changement de currentSprite, la position se mette à jour toute seule?
             CharacterState = State.IDLE;
             jumpsDone = 0;
-            velocityY = 0;
+
         }
 
         public void OnCollision(ICollidable other)
