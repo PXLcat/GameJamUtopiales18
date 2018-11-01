@@ -93,12 +93,14 @@ namespace GameJamUtopiales
         {
             Rectangle sourceRectangle = new Rectangle(CurrentFrame * FrameWidth, 0, FrameWidth, FrameHeight);
             int layerDepth = 0; //TODO attention à layer depth, à ajouter comme para plus tard
+            Vector2 drawPosition = new Vector2(CurrentPosition.X, CurrentPosition.Y + 8); //permet de donner l'impression que le sprite est ancré dans le sol et non en train de flotter au dessus
+
 
             Debug.WriteLine("Current Frame: " + CurrentFrame + " nbColumns: " + Columns);
             if (horizontalFlip)
-                sb.Draw(Texture, CurrentPosition, sourceRectangle, Color.White, 0, center, 1, SpriteEffects.FlipHorizontally, layerDepth);
+                sb.Draw(Texture, drawPosition, sourceRectangle, Color.White, 0, center, 1, SpriteEffects.FlipHorizontally, layerDepth);
             else
-                sb.Draw(Texture, CurrentPosition, sourceRectangle, Color.White, 0, center, 1, SpriteEffects.None, layerDepth);
+                sb.Draw(Texture, drawPosition, sourceRectangle, Color.White, 0, center, 1, SpriteEffects.None, layerDepth);
 
         }
     }

@@ -310,6 +310,8 @@ namespace GameJamUtopiales
             CollideType PlayerCollision = new CollideType();
 
             int HitBoxTopPlusOne = 100; //!
+            int HitBoxLeftMinusOne = 100;
+
             foreach (ModelTile cObject in collidableItems)
             {
                 //est ce qu'on est au sol
@@ -334,6 +336,8 @@ namespace GameJamUtopiales
                     if (!cObject.traversablePourHumain)
                     {
                         PlayerCollision.collideRight = true;
+                        PlayerCollision.rightCollisionDepth = byObjectCollision.rightCollisionDepth;
+                        HitBoxLeftMinusOne = cObject.HitBox.Left - 1;
                     }
                     if (!cObject.traversablePourFantome && characterMetamorphose == CharacterMetamorphose.SPIRIT)
                     {
@@ -400,6 +404,13 @@ namespace GameJamUtopiales
                 {
                     Movement = new Vector2(0, Movement.Y);
                 }
+                if (PlayerCollision.rightCollisionDepth > 1)
+                {
+
+                    //this.CurrentPosition = new Vector2(HitBoxLeftMinusOne-CurrentSprite.FrameWidth/2 ,this.CurrentPosition.Y+this.Movement.Y);
+
+                }
+
             }
 
 

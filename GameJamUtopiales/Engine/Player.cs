@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Media;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,13 @@ namespace GameJamUtopiales
         public Character foetus;
         public Character spirit;
 
+        private Song musiqueNormal;
+        private Song musiqueSpirit;
 
+        public void PlayMusique()
+        {
+            MediaPlayer.Play(musiqueNormal);
+        }
         public static Player Instance
         {
             get
@@ -38,12 +45,20 @@ namespace GameJamUtopiales
             this.foetus = factory.CreateCharacter(CharacterMetamorphose.FOETUS);
             this.spirit = factory.CreateCharacter(CharacterMetamorphose.SPIRIT);
 
+            musiqueNormal = mG.Content.Load<Song>("musique_normal");//à terme, classe accessible qui gère la musique, pas dans le Player..
+            musiqueSpirit = mG.Content.Load<Song>("musique_spirit");
 
             CurrentPlayerCharacter = human;
         }
 
         public void SwitchCharacter(CharacterMetamorphose newCharacter)
         {
+            if (CurrentPlayerCharacter.characterMetamorphose == CharacterMetamorphose.SPIRIT 
+                && newCharacter != CharacterMetamorphose.SPIRIT)
+            {
+                MediaPlayer.Stop();
+                MediaPlayer.Play(musiqueNormal);
+            }
             switch (newCharacter)
             {
                 case CharacterMetamorphose.HUMAN:
@@ -65,10 +80,14 @@ namespace GameJamUtopiales
                     spirit.CurrentPosition = CurrentPlayerCharacter.CurrentPosition;
                     spirit.CharacterFaces = CurrentPlayerCharacter.CharacterFaces;
                     this.CurrentPlayerCharacter = spirit;
+
+                    MediaPlayer.Stop();
+                    MediaPlayer.Play(musiqueSpirit);
                     break;
                 default:
                     break;
             }
+
         }
 
     }

@@ -49,7 +49,7 @@ namespace GameJamUtopiales
                     //collision par la gauche du perso
                     result.collideLeft = true;
                     actor2.OnCollision(actor1.CurrentPlayerCharacter);
-                    //result.leftCollisionDepth = actor1.Left - actor1.Right;
+                    result.leftCollisionDepth = actor1.CurrentPlayerCharacter.HitBox.Left - actor2.HitBox.Right;
                 }
                 if (actor1.CurrentPlayerCharacter.HitBox.Right > actor2.HitBox.Left &&
                     actor1.CurrentPlayerCharacter.HitBox.Right < actor2.HitBox.Right)
@@ -58,7 +58,7 @@ namespace GameJamUtopiales
                     result.collideRight = true;
                     actor2.OnCollision(actor1.CurrentPlayerCharacter);
 
-                    //result.rightCollisionDepth = actor1.Right - actor1.Left;
+                    result.rightCollisionDepth = actor1.CurrentPlayerCharacter.HitBox.Right - actor2.HitBox.Left;
                 }
             }
 

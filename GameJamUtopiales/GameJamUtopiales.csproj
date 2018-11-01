@@ -110,6 +110,8 @@
     <Content Include="Content\animation\SPIRIT_IDLE.png" />
     <Content Include="Content\fin_v0.png" />
     <Content Include="Content\FOND_EXPORT.png" />
+    <Content Include="Content\musique_normal.wav" />
+    <Content Include="Content\musique_spirit.wav" />
     <Content Include="Content\tileproto.png" />
     <Content Include="Content\tilesetV2.png" />
     <Content Include="Content\titre_v0.png" />

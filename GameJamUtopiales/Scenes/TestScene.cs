@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using TiledSharp;
+using Microsoft.Xna.Framework.Media;
 
 namespace GameJamUtopiales
 {
@@ -30,9 +31,12 @@ namespace GameJamUtopiales
             tiledMap.Load(mainGame, windowWidth, windowHeight);
             // TODO: use this.Content to load your game content here
 
+
             Debug.WriteLine("Load TestScene");
 
             player.Load(mainGame);
+            player.PlayMusique();
+
             player.CurrentPlayerCharacter.CurrentPosition = new Vector2(200, 600);
 
 
