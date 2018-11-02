@@ -62,7 +62,8 @@ namespace GameJamUtopiales
         public int MaxJumps { get; set; }
         public float RunSpeed { get; set; }
 
-        public Vector2 Movement { get; set; }
+        private float PreviousPositionX, PreviousPositionY;
+        //public Vector2 Movement { get; set; }
         public float JumpHeight { get; set; }
 
 
@@ -79,8 +80,6 @@ namespace GameJamUtopiales
 
         public Texture2D Texture { get => CurrentSprite.Texture; set => throw new Exception("La texture d'un sprite ne peut être modifiée directement"); }
         public Vector2 CurrentPosition { get; set; }
-
-
 
         #region Methods
         public Character(CharacterMetamorphose characterName, AnimatedSprite spriteIdle, AnimatedSprite spriteRun, AnimatedSprite spriteJump, AnimatedSprite spriteFall, AnimatedSprite spriteAttack1, int jumpHeight = 120, int maxJumps = 2, float runSpeed = 5)
@@ -110,143 +109,106 @@ namespace GameJamUtopiales
         }
         public void Update(List<InputType> inputs, Map currentMap)
         {
-            Movement = Vector2.Zero;
-            if (inputs.Count > 0)
-            {
-                SortAndExecuteInput(inputs);
-            }
-            else if (CharacterState == State.RUNNING)
-            {
-                CharacterState = State.IDLE;
-            }
-            ContinueActions();
+            PreviousPositionX = CurrentPosition.X;
+            PreviousPositionY = CurrentPosition.Y;
 
+            SortAndExecuteInput(inputs);
             ApplyGravity();
 
             CheckCollisions(currentMap);
 
-            CurrentPosition += Movement;
+            if(!isGrounded)
+            {
+                CharacterState = State.JUMPING;
+            }
+
+            if (PreviousPositionX != CurrentPosition.X)
+            {
+                if (CharacterState != State.JUMPING)
+                    CharacterState = State.RUNNING;
+
+                if (PreviousPositionX > CurrentPosition.X && CharacterFaces != Facing.LEFT)
+                    CharacterFaces = Facing.LEFT;
+                else if (PreviousPositionX < CurrentPosition.X && CharacterFaces != Facing.RIGHT)
+                    CharacterFaces = Facing.RIGHT;
+            }
+            else
+                CharacterState = State.IDLE;
 
             CurrentSprite.CurrentPosition = CurrentPosition; //TODO redondant avec la ligne précédente; faire un eventHandler pour qu'à chaque
             CurrentSprite.Update();                             //changement de sprite, la position se màj automatiquement par rapport à CharaPosition?
         }
 
-
-        private void ContinueActions()
-        {
-            //if (CharacterState == State.ATTACKING1)
-            //{
-            //    if (spriteAttack1.FirstLoopDone)
-            //    {
-            //        ResetPose();
-            //        spriteAttack1.FirstLoopDone = false;
-            //    }
-            //}
-        }
-
         private void SortAndExecuteInput(List<InputType> inputs)
         {
+            if (inputs.Count == 0)
+                return;
 
             if (inputs.Contains(InputType.JUMP))
             {
                 Debug.Write("Jumps done: " + jumpsDone);
-
-                if (jumpsDone < MaxJumps)
-                {
-                    Jump();
-                }
-
-
+                Jump();
             }
-            if (inputs.Contains(InputType.MOVE_LEFT) && (inputs.Contains(InputType.MOVE_RIGHT)))
-            {
-                //ResetPose();
-            }
-            else if (inputs.Contains(InputType.MOVE_LEFT) && (!inputs.Contains(InputType.MOVE_RIGHT)))
-            {
+
+            if (inputs.Contains(InputType.MOVE_LEFT))
                 MoveLeft();
-            }
-            else if (inputs.Contains(InputType.MOVE_RIGHT) && (!inputs.Contains(InputType.MOVE_LEFT)))
-            {
+
+            if (inputs.Contains(InputType.MOVE_RIGHT))
                 MoveRight();
-            }
+
             if (inputs.Contains(InputType.FLYUP))
-            {
                 FlyUp();
-            }
-            else if (inputs.Contains(InputType.FLYDOWN))
-            {
+
+            if (inputs.Contains(InputType.FLYDOWN))
                 FlyDown();
-            }
+            
             //else if (inputs.Contains(InputType.ATTACK1))
             //{
             //    if ((CharacterState != State.JUMPING) && (CharacterState != State.FALLING))
             //    {
             //        Attack1();
             //    }
-
             //}
         }
 
         private void FlyUp()
         {
-            this.Movement = new Vector2(this.Movement.X, this.Movement.Y - RunSpeed);
+            CurrentPosition = new Vector2(CurrentPosition.X, CurrentPosition.Y - RunSpeed);
         }
+
         private void FlyDown()
         {
-            this.Movement = new Vector2(this.Movement.X, this.Movement.Y  +RunSpeed);
+            CurrentPosition = new Vector2(CurrentPosition.X, CurrentPosition.Y + RunSpeed);
         }
 
         private void Attack1() //attaque au sol //TODO comment externaliser les attaques?
         {
             CharacterState = State.ATTACKING1;
-
         }
 
         private void Jump()
         {
+            if (characterMetamorphose == CharacterMetamorphose.FOETUS || jumpsDone >= MaxJumps)
+                return;
 
-            if ((characterMetamorphose != CharacterMetamorphose.FOETUS)
-                && (characterMetamorphose != CharacterMetamorphose.FOETUS))
-            {
-                this.JumpInitPosY = this.CurrentPosition.Y;
+            JumpInitPosY = CurrentPosition.Y;
 
-                jumpsDone++;
+            jumpsDone++;
 
-                CharacterState = State.JUMPING;
-                isGrounded = false;
-                spriteJump.CurrentFrame = 0;
+            isGrounded = false;
+            spriteJump.CurrentFrame = 0;
 
-                velocityY = -12; //TODO externaliser
-            }
-
-
+            velocityY = -12; //TODO externaliser
         }
 
         private void MoveRight()
         {
-            if (CharacterState != State.ATTACKING1)
-            {
-                if (CharacterState == State.IDLE)
-                {
-                    CharacterState = State.RUNNING;
-                }
-                CharacterFaces = Facing.RIGHT;
-
-                this.Movement = new Vector2(this.Movement.X + RunSpeed, this.Movement.Y);
-            }
+            CurrentPosition = new Vector2(CurrentPosition.X + RunSpeed, CurrentPosition.Y);
         }
+
         private void MoveLeft()
         {
-            if (CharacterState != State.ATTACKING1)
-            {
-                if (CharacterState == State.IDLE)
-                {
-                    CharacterState = State.RUNNING;
-                }
-                CharacterFaces = Facing.LEFT;
-                this.Movement = new Vector2(this.Movement.X - RunSpeed, this.Movement.Y);
-            }
+            CurrentPosition = new Vector2(CurrentPosition.X - RunSpeed, CurrentPosition.Y);
         }
 
         public void Draw(SpriteBatch sb)
@@ -264,43 +226,19 @@ namespace GameJamUtopiales
 
         public void ApplyGravity()
         {
-            if (characterMetamorphose != CharacterMetamorphose.SPIRIT)
-            {
-                //CharacterMetamorphose.
-                if ((velocityY + gravity) > maxVelocity)
-                {
-                    velocityY = maxVelocity;
-                }
-                else
-                {
-                    velocityY += gravity;
-                }
-
-                //if (velocityY > 1.2f) //!TODO
-                //{
-                //    CharacterState = State.FALLING;
-                //}
-
-            }
+            if (characterMetamorphose == CharacterMetamorphose.SPIRIT)
+                velocityY = 0;
             else
             {
-                if ((velocityY + gravity) > maxVelocity)
-                {
+                if (velocityY < maxVelocity)
+                    velocityY += gravity;
+                else
                     velocityY = maxVelocity;
-                }
             }
-
-
 
             Debug.WriteLine("velocity : " + velocityY);
 
-            this.Movement = new Vector2(this.Movement.X, (this.Movement.Y + velocityY));
-            if (characterMetamorphose == CharacterMetamorphose.SPIRIT)
-            {
-                velocityY = 0;
-            }
-
-
+            CurrentPosition = new Vector2(CurrentPosition.X, CurrentPosition.Y + velocityY);
         }
 
         public void CheckCollisions(Map currentMap)
@@ -309,122 +247,72 @@ namespace GameJamUtopiales
 
             CollideType PlayerCollision = new CollideType();
 
-            int HitBoxTopPlusOne = 100; //!
             foreach (ModelTile cObject in collidableItems)
             {
                 //est ce qu'on est au sol
-
                 CollideType byObjectCollision = Utilities.CheckCollision(Player.Instance, cObject);
+
+                if (cObject.traversablePourHumain && characterMetamorphose != CharacterMetamorphose.SPIRIT ||
+                    cObject.traversablePourFantome && characterMetamorphose == CharacterMetamorphose.SPIRIT)
+                    continue;
 
                 if (byObjectCollision.collideLeft)
                 {
-                    if (!cObject.traversablePourHumain)
-                    {
-                        PlayerCollision.collideLeft = true;
-                        //this.CurrentPosition = new Vector2(cObject.HitBox.Right,this.CurrentPosition.X);
-                    }
-                    if (!cObject.traversablePourFantome && characterMetamorphose==CharacterMetamorphose.SPIRIT )
-                    {
-                        PlayerCollision.collideLeft = true;
-                    }
-
+                    PlayerCollision.collideLeft = true;
+                    PlayerCollision.leftCollisionPosition = Math.Max(PlayerCollision.leftCollisionPosition, byObjectCollision.leftCollisionPosition);
                 }
+                
                 if (byObjectCollision.collideRight)
                 {
-                    if (!cObject.traversablePourHumain)
-                    {
-                        PlayerCollision.collideRight = true;
-                    }
-                    if (!cObject.traversablePourFantome && characterMetamorphose == CharacterMetamorphose.SPIRIT)
-                    {
-                        PlayerCollision.collideRight = true;
-                    }
-
+                    PlayerCollision.collideRight = true;
+                    PlayerCollision.rightCollisionPosition = Math.Max(PlayerCollision.rightCollisionPosition, byObjectCollision.rightCollisionPosition);
                 }
-                if (byObjectCollision.collideBottom && !cObject.traversablePourHumain)
+
+                if (byObjectCollision.collideBottom)
                 {
                     PlayerCollision.collideBottom = true;
-                    PlayerCollision.bottomCollisionDepth = byObjectCollision.bottomCollisionDepth;
-                    HitBoxTopPlusOne = cObject.HitBox.Top + 1;
-
-
-
+                    PlayerCollision.bottomCollisionPosition = Math.Max(PlayerCollision.bottomCollisionPosition, byObjectCollision.bottomCollisionPosition);
                 }
 
-
+                if (byObjectCollision.collideTop)
+                {
+                    PlayerCollision.collideTop = true;
+                    PlayerCollision.topCollisionPosition = Math.Max(PlayerCollision.topCollisionPosition, byObjectCollision.topCollisionPosition);
+                }
             }
 
             Debug.WriteLine(PlayerCollision.ToString());
 
+            if(PlayerCollision.collideTop)
+            {
+                velocityY = 0;
+                CurrentPosition = new Vector2(CurrentPosition.X, PreviousPositionY);
+            }
+
             if (PlayerCollision.collideBottom)
             {
-                if (this.Movement.Y > 0)
-                {
-                    this.Movement = new Vector2(this.Movement.X, 0);
-                }
-
-                if (PlayerCollision.bottomCollisionDepth > 1)
-                {
-                    //if (CharacterState == State.FALLING) //
-                    //{
-                    //    ResetPose();
-                    //    jumpsDone = 0;
-                    //}
-                    ResetPose();
-                    this.CurrentPosition = new Vector2(this.CurrentPosition.X + this.Movement.X, HitBoxTopPlusOne);
-                    
-                }
-                else if (PlayerCollision.bottomCollisionDepth == 1)
-                {
-                    //ResetPose();
-                }
-            }
-            else
-            {
-                CharacterState = State.FALLING;
+                velocityY = 0;
+                jumpsDone = 0;
+                isGrounded = true;
+                CurrentPosition = new Vector2(CurrentPosition.X, PreviousPositionY);
             }
 
-            if (PlayerCollision.collideLeft)
-            {
-                if (Movement.X<0)
-                {
-                    Movement = new Vector2(0, Movement.Y);
-
-                }
-                
-
-            }
-            if (PlayerCollision.collideRight)
-            {
-                if (Movement.X > 0)
-                {
-                    Movement = new Vector2(0, Movement.Y);
-                }
-            }
-
-
+            if (PlayerCollision.collideLeft || PlayerCollision.collideRight)
+                CurrentPosition = new Vector2(PreviousPositionX, CurrentPosition.Y);
         }
-
-
-
 
         public void ResetPose()
         {
             //TODO eventarg pour qu'à chaque changement de currentSprite, la position se mette à jour toute seule?
             CharacterState = State.IDLE;
             jumpsDone = 0;
-
         }
 
         public void OnCollision(ICollidable other)
         {
             Debug.Write("Collision entre " + this.characterMetamorphose + " et " + other.ToString());
         }
-
-
         #endregion
-
-
 
         public enum State
         {
@@ -433,14 +321,12 @@ namespace GameJamUtopiales
             JUMPING,
             FALLING,
             ATTACKING1
-
-
         }
+
         public enum Facing
         {
             LEFT,
             RIGHT
         }
-
     }
 }

@@ -9,62 +9,93 @@ namespace GameJamUtopiales
 {
     public class Utilities
     {
-
-        public static CollideType CheckCollision(Player actor1, ModelTile actor2) //TODO la gravité devrait passer par là aussi ?
+        public static CollideType CheckCollision(Player actor1, ModelTile actor2) // Toujours gérer la collision après tous les mouvements
         {
             CollideType result = new CollideType();
+            Rectangle playerHitbox = actor1.CurrentPlayerCharacter.HitBox;
 
-            if (actor1.CurrentPlayerCharacter.HitBox.Intersects(actor2.HitBox))
+            if (playerHitbox.Intersects(actor2.HitBox))
             {
+                actor2.OnCollision(actor1.CurrentPlayerCharacter);
 
-                if (actor1.CurrentPlayerCharacter.HitBox.Top > actor2.HitBox.Bottom)
+                // On calcule les rapports de distance pour chaque point du player et le centre du tile en X et en Y
+                int distanceTopY = actor2.HitBox.Center.Y - playerHitbox.Top;
+                int distanceLeftX = actor2.HitBox.Center.X - playerHitbox.Left;
+                int distanceRightX = actor2.HitBox.Center.X - playerHitbox.Right;
+                int distanceBottomY = actor2.HitBox.Center.Y - playerHitbox.Bottom;
+
+                // On calcule les distances des vecteurs entre chaque point à partir des calculs du dessus
+                int distanceVectorTopLeft = (int)(Math.Pow(distanceLeftX, 2) + Math.Pow(distanceTopY, 2));
+                int distanceVectorTopRight = (int)(Math.Pow(distanceRightX, 2) + Math.Pow(distanceTopY, 2));
+                int distanceVectorBottomLeft = (int)(Math.Pow(distanceLeftX, 2) + Math.Pow(distanceBottomY, 2));
+                int distanceVectorBottomRight = (int)(Math.Pow(distanceRightX, 2) + Math.Pow(distanceBottomY, 2));
+
+                // On sélectionne celle qui est la plus proche du centre de la tuile touchée
+                int closerDistance = Math.Min(distanceVectorTopLeft, distanceVectorTopRight);
+                closerDistance = Math.Min(closerDistance, distanceVectorBottomLeft);
+                closerDistance = Math.Min(closerDistance, distanceVectorBottomRight);
+
+                if (closerDistance == distanceVectorTopLeft)
                 {
-                    //collision par le haut
-                    result.collideTop = true;
-                    actor2.OnCollision(actor1.CurrentPlayerCharacter);
-                    //result.topCollisionDepth = actor1.Top - actor1.Bottom;
+                    // Si la distance absolue en X du point en haut à gauche est
+                    // plus proche du centre de la tuile que sa distance en Y
+                    // alors le player touche par son côté haut sinon, il touche par son côté gauche
+                    if (Math.Abs(distanceLeftX) < Math.Abs(distanceTopY))
+                    {
+                        result.collideTop = true;
+                        result.topCollisionPosition = actor2.HitBox.Top;
+                    }
+                    else
+                    {
+                        result.collideLeft = true;
+                        result.leftCollisionPosition = actor2.HitBox.Left;
+                    }
                 }
-                if (/*new Rectangle(actor1.CurrentPlayerCharacter.HitBox.X,
-                    actor1.CurrentPlayerCharacter.HitBox.Y-1,
-                    actor1.CurrentPlayerCharacter.HitBox.Width,
-                    actor1.CurrentPlayerCharacter.HitBox.Height).Bottom
-                    > actor2.HitBox.Top)*/actor1.CurrentPlayerCharacter.HitBox.Bottom > actor2.HitBox.Top)
+                else if (closerDistance == distanceVectorTopRight)
                 {
-                    //collision par le bas
-                    result.collideBottom = true;
-                    actor2.OnCollision(actor1.CurrentPlayerCharacter);
-                    result.bottomCollisionDepth = actor1.CurrentPlayerCharacter.HitBox.Bottom - actor2.HitBox.Top;
+                    if (Math.Abs(distanceRightX) < Math.Abs(distanceTopY))
+                    {
+                        result.collideTop = true;
+                        result.topCollisionPosition = actor2.HitBox.Top;
+                    }
+                    else
+                    {
+                        result.collideRight = true;
+                        result.rightCollisionPosition = actor2.HitBox.Right;
+                    }
                 }
-
-            }
-            //collisions gauche droite
-            Rectangle horizontalCollisions = new Rectangle(actor1.CurrentPlayerCharacter.HitBox.X, actor1.CurrentPlayerCharacter.HitBox.Y,
-                actor1.CurrentPlayerCharacter.HitBox.Width, actor1.CurrentPlayerCharacter.HitBox.Height-1);
-
-            if (horizontalCollisions.Intersects(actor2.HitBox))
-            {
-                if (actor1.CurrentPlayerCharacter.HitBox.Left < actor2.HitBox.Right &&
-                    actor1.CurrentPlayerCharacter.HitBox.Left > actor2.HitBox.Left)
+                else if (closerDistance == distanceVectorBottomLeft)
                 {
-                    //collision par la gauche du perso
-                    result.collideLeft = true;
-                    actor2.OnCollision(actor1.CurrentPlayerCharacter);
-                    //result.leftCollisionDepth = actor1.Left - actor1.Right;
+                    if (Math.Abs(distanceLeftX) < Math.Abs(distanceBottomY))
+                    {
+                        result.collideBottom = true;
+                        result.bottomCollisionPosition = actor2.HitBox.Bottom;
+                    }
+                    else
+                    {
+                        result.collideLeft = true;
+                        result.leftCollisionPosition = actor2.HitBox.Left;
+                    }
                 }
-                if (actor1.CurrentPlayerCharacter.HitBox.Right > actor2.HitBox.Left &&
-                    actor1.CurrentPlayerCharacter.HitBox.Right < actor2.HitBox.Right)
+                else if (closerDistance == distanceVectorBottomRight)
                 {
-                    //collision par la droite
-                    result.collideRight = true;
-                    actor2.OnCollision(actor1.CurrentPlayerCharacter);
-
-                    //result.rightCollisionDepth = actor1.Right - actor1.Left;
+                    if (Math.Abs(distanceRightX) < Math.Abs(distanceBottomY))
+                    {
+                        result.collideBottom = true;
+                        result.bottomCollisionPosition = actor2.HitBox.Bottom;
+                    }
+                    else
+                    {
+                        result.collideRight = true;
+                        result.rightCollisionPosition = actor2.HitBox.Right;
+                    }
                 }
             }
 
             return result;
         }
     }
+
     public class CollideType
     {
         public bool collideLeft;
@@ -72,17 +103,17 @@ namespace GameJamUtopiales
         public bool collideTop;
         public bool collideBottom;
 
-        public int leftCollisionDepth;
-        public int rightCollisionDepth;
-        public int topCollisionDepth;
-        public int bottomCollisionDepth;
+        public float leftCollisionPosition = float.NegativeInfinity;
+        public float rightCollisionPosition = float.PositiveInfinity;
+        public float topCollisionPosition = float.NegativeInfinity;
+        public float bottomCollisionPosition = float.PositiveInfinity;
 
-        public CollideType(bool collideLeft = false, bool collideRight = false, bool collideUp = false, bool collideDown = false)
+        public CollideType(bool collideLeft = false, bool collideRight = false, bool collideTop = false, bool collideBottom = false)
         {
             this.collideLeft = collideLeft;
             this.collideRight = collideRight;
-            this.collideTop = collideUp;
-            this.collideBottom = collideDown;
+            this.collideTop = collideTop;
+            this.collideBottom = collideBottom;
         }
 
         public override string ToString()

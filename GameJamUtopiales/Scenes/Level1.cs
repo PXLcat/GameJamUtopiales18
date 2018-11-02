@@ -14,5 +14,8 @@ namespace GameJamUtopiales.Scenes
 {
     public class Level1 : Scene
     {
+        public Level1(MainGame mG) : base(mG)
+        {
+        }
     }
 }
