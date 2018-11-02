@@ -11,7 +11,7 @@ namespace GameJamUtopiales
     {
         CharacterMetamorphose typeMetamorphose;
 
-        public TileTransform(Vector2 currentPosition, int width, int height, CharacterMetamorphose typeMetamorphose) : base(currentPosition, width, height)
+        public TileTransform(Vector2 currentPosition, int width, int height, TileType tileType, CollideType collideSides, CharacterMetamorphose typeMetamorphose) : base(currentPosition, width, height, tileType, collideSides)
         {
             CurrentPosition = currentPosition;
             traversablePourHumain = true;

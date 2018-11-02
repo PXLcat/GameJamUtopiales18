@@ -97,121 +97,186 @@ namespace GameJamUtopiales
                     float x = column * tileWidth;
                     float y = line * tileHeight;
 
+                    CollideType collideSides = new CollideType();
                     Rectangle tilesetRec = new Rectangle(tileWidth * tilesetColumn, tileHeight * tilesetLine, tileWidth, tileHeight);
-
 
                     switch (tileType)
                     {
                         case TileType.NOTHING:
                             break;
                         case TileType.GRASSCORNUPRIGHT:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            collideSides.collideTop = true;
+                            collideSides.collideRight = true;
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, TileType.GRASSCORNUPRIGHT, collideSides));
                             break;
                         case TileType.GRASSCORNUPLEFT:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            collideSides.collideTop = true;
+                            collideSides.collideLeft = true;
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, TileType.GRASSCORNUPLEFT, collideSides));
                             break;
                         case TileType.GROUNDCORNUPRIGHT:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            collideSides.collideTop = true;
+                            collideSides.collideRight = true;
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, TileType.GROUNDCORNUPRIGHT, collideSides));
                             break;
                         case TileType.GROUNDCORNUPLEFT:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            collideSides.collideTop = true;
+                            collideSides.collideLeft = true;
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, TileType.GROUNDCORNUPLEFT, collideSides));
                             break;
                         case TileType.GHOSTPARTICLE:
                             break;
                         case TileType.GHOSTWALL:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            collideSides.collideLeft = collideSides.collideRight = true;
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, TileType.GHOSTWALL, collideSides));
                             break;
                         case TileType.WALLRIGHT:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            collideSides.collideRight = true;
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, TileType.WALLRIGHT, collideSides));
                             break;
                         case TileType.WALLLEFT:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            collideSides.collideLeft = true;
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, TileType.WALLLEFT, collideSides));
                             break;
                         case TileType.UNDERGROUND:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            collideSides.collideTop = collideSides.collideBottom = true;
+                            collideSides.collideLeft = collideSides.collideRight = true;
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, TileType.UNDERGROUND, null));
                             break;
                         case TileType.FLOOR:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            collideSides.collideTop = true;
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, TileType.FLOOR, collideSides));
                             break;
                         case TileType.RONCEUP:
-                            layerPlayer.Add(new TileRonces(new Vector2(x, y), tileWidth, tileWidth));
+                            collideSides.collideTop = collideSides.collideBottom = true;
+                            collideSides.collideLeft = collideSides.collideRight = true;
+                            layerPlayer.Add(new TileRonces(new Vector2(x, y), tileWidth, tileWidth, TileType.RONCEUP, collideSides));
                             break;
                         case TileType.RONCEDOWN:
-                            layerPlayer.Add(new TileRonces(new Vector2(x, y), tileWidth, tileWidth));
+                            collideSides.collideTop = collideSides.collideBottom = true;
+                            collideSides.collideLeft = collideSides.collideRight = true;
+                            layerPlayer.Add(new TileRonces(new Vector2(x, y), tileWidth, tileWidth, TileType.RONCEDOWN, collideSides));
                             break;
                         case TileType.GRASSCORNDOWNRIGHT:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            collideSides.collideBottom = true;
+                            collideSides.collideRight = true;
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, TileType.GRASSCORNDOWNRIGHT, collideSides));
                             break;
                         case TileType.GRASSCORNDOWNLEFT:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            collideSides.collideBottom = true;
+                            collideSides.collideLeft = true;
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, TileType.GRASSCORNDOWNLEFT, collideSides));
                             break;
                         case TileType.GROUNDCORNDOWNRIGHT:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            collideSides.collideBottom = true;
+                            collideSides.collideRight = true;
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, TileType.GROUNDCORNDOWNRIGHT, collideSides));
                             break;
                         case TileType.GROUNDCORNDOWNLEFT:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            collideSides.collideBottom = true;
+                            collideSides.collideLeft = true;
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, TileType.GROUNDCORNDOWNLEFT, collideSides));
                             break;
                         case TileType.ROOF:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            collideSides.collideBottom = true;
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, TileType.ROOF, collideSides));
                             break;
                         case TileType.BLANK1:
                             break;
                         case TileType.MUTH1:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HUMAN));
+                            collideSides.collideTop = collideSides.collideBottom = true;
+                            collideSides.collideLeft = collideSides.collideRight = true;
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, TileType.MUTH1, collideSides,  CharacterMetamorphose.HUMAN));
                             break;
                         case TileType.MUTH2:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HUMAN));
+                            collideSides.collideTop = collideSides.collideBottom = true;
+                            collideSides.collideLeft = collideSides.collideRight = true;
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, TileType.MUTH2, collideSides,  CharacterMetamorphose.HUMAN));
                             break;
                         case TileType.MUTB1:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.FOETUS));
+                            collideSides.collideTop = collideSides.collideBottom = true;
+                            collideSides.collideLeft = collideSides.collideRight = true;
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, TileType.MUTB1, collideSides,  CharacterMetamorphose.FOETUS));
                             break;
                         case TileType.MUTB2:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.FOETUS));
+                            collideSides.collideTop = collideSides.collideBottom = true;
+                            collideSides.collideLeft = collideSides.collideRight = true;
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, TileType.MUTB2, collideSides,  CharacterMetamorphose.FOETUS));
                             break;
                         case TileType.MUTF1:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HULK));
+                            collideSides.collideTop = collideSides.collideBottom = true;
+                            collideSides.collideLeft = collideSides.collideRight = true;
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, TileType.MUTF1, collideSides,  CharacterMetamorphose.HULK));
                             break;
                         case TileType.MUTF2:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HULK));
+                            collideSides.collideTop = collideSides.collideBottom = true;
+                            collideSides.collideLeft = collideSides.collideRight = true;
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, TileType.MUTF2, collideSides,  CharacterMetamorphose.HULK));
                             break;
                         case TileType.MUTH3:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HUMAN));
+                            collideSides.collideTop = collideSides.collideBottom = true;
+                            collideSides.collideLeft = collideSides.collideRight = true;
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, TileType.MUTH3, collideSides, CharacterMetamorphose.HUMAN));
                             break;
                         case TileType.MUTH4:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HUMAN));
+                            collideSides.collideTop = collideSides.collideBottom = true;
+                            collideSides.collideLeft = collideSides.collideRight = true;
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, TileType.MUTH4, collideSides,  CharacterMetamorphose.HUMAN));
                             break;
                         case TileType.MUTB3:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.FOETUS));
+                            collideSides.collideTop = collideSides.collideBottom = true;
+                            collideSides.collideLeft = collideSides.collideRight = true;
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, TileType.MUTB3, collideSides,  CharacterMetamorphose.FOETUS));
                             break;
                         case TileType.MUTB4:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.FOETUS));
+                            collideSides.collideTop = collideSides.collideBottom = true;
+                            collideSides.collideLeft = collideSides.collideRight = true;
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, TileType.MUTB4, collideSides,  CharacterMetamorphose.FOETUS));
                             break;
                         case TileType.MUTF3:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HULK));
+                            collideSides.collideTop = collideSides.collideBottom = true;
+                            collideSides.collideLeft = collideSides.collideRight = true;
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, TileType.MUTF3, collideSides,  CharacterMetamorphose.HULK));
                             break;
                         case TileType.MUTF4:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HULK));
+                            collideSides.collideTop = collideSides.collideBottom = true;
+                            collideSides.collideLeft = collideSides.collideRight = true;
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, TileType.MUTF4, collideSides,  CharacterMetamorphose.HULK));
                             break;
                         case TileType.MUTH5:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HUMAN));
+                            collideSides.collideTop = collideSides.collideBottom = true;
+                            collideSides.collideLeft = collideSides.collideRight = true;
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, TileType.MUTH5, collideSides,  CharacterMetamorphose.HUMAN));
                             break;
                         case TileType.MUTH6:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HUMAN));
+                            collideSides.collideTop = collideSides.collideBottom = true;
+                            collideSides.collideLeft = collideSides.collideRight = true;
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, TileType.MUTH6, collideSides, CharacterMetamorphose.HUMAN));
                             break;
                         case TileType.MUTB5:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.FOETUS));
+                            collideSides.collideTop = collideSides.collideBottom = true;
+                            collideSides.collideLeft = collideSides.collideRight = true;
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, TileType.MUTB5, collideSides,  CharacterMetamorphose.FOETUS));
                             break;
                         case TileType.MUTB6:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.FOETUS));
+                            collideSides.collideTop = collideSides.collideBottom = true;
+                            collideSides.collideLeft = collideSides.collideRight = true;
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, TileType.MUTB6, collideSides,  CharacterMetamorphose.FOETUS));
                             break;
                         case TileType.MUTF5:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HULK));
+                            collideSides.collideTop = collideSides.collideBottom = true;
+                            collideSides.collideLeft = collideSides.collideRight = true;
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, TileType.MUTF5, collideSides,  CharacterMetamorphose.HULK));
                             break;
                         case TileType.MUTF6:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HULK));
+                            collideSides.collideTop = collideSides.collideBottom = true;
+                            collideSides.collideLeft = collideSides.collideRight = true;
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, TileType.MUTF6, collideSides,  CharacterMetamorphose.HULK));
                             break;
                         case TileType.EXIT1:
-                            layerPlayer.Add(new TileExit(new Vector2(x, y), tileWidth, tileWidth,mG));
+                            collideSides.collideTop = collideSides.collideBottom = true;
+                            collideSides.collideLeft = collideSides.collideRight = true;
+                            layerPlayer.Add(new TileExit(new Vector2(x, y), tileWidth, tileWidth, TileType.EXIT1, collideSides, mG));
                             break;
                         case TileType.EXIT2:
                             break;
@@ -222,7 +287,9 @@ namespace GameJamUtopiales
                         case TileType.ROCK3:
                             break;
                         case TileType.UNDERGROUND2:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            collideSides.collideTop = collideSides.collideBottom = true;
+                            collideSides.collideLeft = collideSides.collideRight = true;
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, TileType.UNDERGROUND2, null));
                             break;
                         case TileType.EXIT3:
                             break;
@@ -235,7 +302,9 @@ namespace GameJamUtopiales
                         case TileType.ROCK6:
                             break;
                         case TileType.UNDERGROUND3:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            collideSides.collideTop = collideSides.collideBottom = true;
+                            collideSides.collideLeft = collideSides.collideRight = true;
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, TileType.UNDERGROUND3, null));
                             break;
                         case TileType.EXIT5:
                             break;
@@ -254,10 +323,14 @@ namespace GameJamUtopiales
                         case TileType.CANNONRIGHT2:
                             break;
                         case TileType.CORNERSINGLELEFT:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            collideSides.collideTop = true;
+                            collideSides.collideLeft = true;
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, TileType.CORNERSINGLELEFT, collideSides));
                             break;
                         case TileType.CORNERSINGLERIGHT:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            collideSides.collideTop = true;
+                            collideSides.collideRight = true;
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, TileType.CORNERSINGLERIGHT, collideSides));
                             break;
                         case TileType.CANNONLEFT1:
                             break;
@@ -278,8 +351,6 @@ namespace GameJamUtopiales
                         default:
                             break;
                     }
-
-
                 }
 
                 column++;

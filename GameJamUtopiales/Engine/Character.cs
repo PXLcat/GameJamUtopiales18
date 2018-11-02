@@ -121,19 +121,18 @@ namespace GameJamUtopiales
             {
                 CharacterState = State.JUMPING;
             }
-
-            if (PreviousPositionX != CurrentPosition.X)
-            {
-                if (CharacterState != State.JUMPING)
-                    CharacterState = State.RUNNING;
-
-                if (PreviousPositionX > CurrentPosition.X && CharacterFaces != Facing.LEFT)
-                    CharacterFaces = Facing.LEFT;
-                else if (PreviousPositionX < CurrentPosition.X && CharacterFaces != Facing.RIGHT)
-                    CharacterFaces = Facing.RIGHT;
-            }
             else
-                CharacterState = State.IDLE;
+            {
+                if (PreviousPositionX != CurrentPosition.X)
+                    CharacterState = State.RUNNING;
+                else
+                    CharacterState = State.IDLE;
+            }
+
+            if (PreviousPositionX > CurrentPosition.X && CharacterFaces != Facing.LEFT)
+                CharacterFaces = Facing.LEFT;
+            else if (PreviousPositionX < CurrentPosition.X && CharacterFaces != Facing.RIGHT)
+                CharacterFaces = Facing.RIGHT;
 
             CurrentSprite.CurrentPosition = CurrentPosition; //TODO redondant avec la ligne précédente; faire un eventHandler pour qu'à chaque
             CurrentSprite.Update();                             //changement de sprite, la position se màj automatiquement par rapport à CharaPosition?
@@ -161,7 +160,7 @@ namespace GameJamUtopiales
 
             if (inputs.Contains(InputType.FLYDOWN))
                 FlyDown();
-            
+
             //else if (inputs.Contains(InputType.ATTACK1))
             //{
             //    if ((CharacterState != State.JUMPING) && (CharacterState != State.FALLING))
@@ -173,12 +172,14 @@ namespace GameJamUtopiales
 
         private void FlyUp()
         {
-            CurrentPosition = new Vector2(CurrentPosition.X, CurrentPosition.Y - RunSpeed);
+            if (characterMetamorphose == CharacterMetamorphose.SPIRIT)
+                CurrentPosition = new Vector2(CurrentPosition.X, CurrentPosition.Y - RunSpeed);
         }
 
         private void FlyDown()
         {
-            CurrentPosition = new Vector2(CurrentPosition.X, CurrentPosition.Y + RunSpeed);
+            if (characterMetamorphose == CharacterMetamorphose.SPIRIT)
+                CurrentPosition = new Vector2(CurrentPosition.X, CurrentPosition.Y + RunSpeed);
         }
 
         private void Attack1() //attaque au sol //TODO comment externaliser les attaques?
@@ -221,7 +222,6 @@ namespace GameJamUtopiales
             sb.Draw(hitboxTexture, CurrentPosition, sourceRectangle, Color.White * 0.5f, 0, CurrentSprite.center, 1, SpriteEffects.FlipHorizontally, 0);
 #endif
             CurrentSprite.Draw(sb, (CharacterFaces == Facing.LEFT));
-
         }
 
         public void ApplyGravity()
@@ -265,19 +265,19 @@ namespace GameJamUtopiales
                 if (byObjectCollision.collideRight)
                 {
                     PlayerCollision.collideRight = true;
-                    PlayerCollision.rightCollisionPosition = Math.Max(PlayerCollision.rightCollisionPosition, byObjectCollision.rightCollisionPosition);
-                }
-
-                if (byObjectCollision.collideBottom)
-                {
-                    PlayerCollision.collideBottom = true;
-                    PlayerCollision.bottomCollisionPosition = Math.Max(PlayerCollision.bottomCollisionPosition, byObjectCollision.bottomCollisionPosition);
+                    PlayerCollision.rightCollisionPosition = Math.Min(PlayerCollision.rightCollisionPosition, byObjectCollision.rightCollisionPosition);
                 }
 
                 if (byObjectCollision.collideTop)
                 {
                     PlayerCollision.collideTop = true;
                     PlayerCollision.topCollisionPosition = Math.Max(PlayerCollision.topCollisionPosition, byObjectCollision.topCollisionPosition);
+                }
+
+                if (byObjectCollision.collideBottom)
+                {
+                    PlayerCollision.collideBottom = true;
+                    PlayerCollision.bottomCollisionPosition = Math.Min(PlayerCollision.bottomCollisionPosition, byObjectCollision.bottomCollisionPosition);
                 }
             }
 
@@ -286,7 +286,7 @@ namespace GameJamUtopiales
             if(PlayerCollision.collideTop)
             {
                 velocityY = 0;
-                CurrentPosition = new Vector2(CurrentPosition.X, PreviousPositionY);
+                CurrentPosition = new Vector2(CurrentPosition.X, PlayerCollision.topCollisionPosition + CurrentSprite.FrameHeight);
             }
 
             if (PlayerCollision.collideBottom)
@@ -294,7 +294,7 @@ namespace GameJamUtopiales
                 velocityY = 0;
                 jumpsDone = 0;
                 isGrounded = true;
-                CurrentPosition = new Vector2(CurrentPosition.X, PreviousPositionY);
+                CurrentPosition = new Vector2(CurrentPosition.X, PlayerCollision.bottomCollisionPosition);
             }
 
             if (PlayerCollision.collideLeft || PlayerCollision.collideRight)

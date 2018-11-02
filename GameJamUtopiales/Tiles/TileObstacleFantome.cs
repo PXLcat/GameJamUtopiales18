@@ -10,14 +10,15 @@ namespace GameJamUtopiales
 {
     public class TileObstacleFantome : ModelTile
     {
-        public TileObstacleFantome(Vector2 currentPosition, int width, int height) : base(currentPosition, width, height)
+        public TileObstacleFantome(Vector2 currentPosition, int width, int height, TileType tileType, CollideType collideSides) : base(currentPosition, width, height, tileType, collideSides)
         {
             CurrentPosition = currentPosition;
-            traversablePourHumain = false;
+            traversablePourHumain = true;
+            traversablePourFantome = false;
         }
         public override void OnCollision(ICollidable other)
         {
-            Debug.WriteLine("Tile mur fantôme");
+            Console.WriteLine("TileObstacleFantome:OnCollision");
         }
     }
 }
