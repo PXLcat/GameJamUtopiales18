@@ -127,6 +127,10 @@ namespace GameJamUtopiales
                         case TileType.GHOSTPARTICLE:
                             break;
                         case TileType.GHOSTWALL:
+<<<<<<< HEAD
+=======
+                            collideSides.collideTop = collideSides.collideBottom = true;
+>>>>>>> 82dc22f8c948e4557eab526a945a4c4473abf045
                             collideSides.collideLeft = collideSides.collideRight = true;
                             layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, TileType.GHOSTWALL, collideSides));
                             break;
@@ -139,8 +143,11 @@ namespace GameJamUtopiales
                             layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, TileType.WALLLEFT, collideSides));
                             break;
                         case TileType.UNDERGROUND:
+<<<<<<< HEAD
                             collideSides.collideTop = collideSides.collideBottom = true;
                             collideSides.collideLeft = collideSides.collideRight = true;
+=======
+>>>>>>> 82dc22f8c948e4557eab526a945a4c4473abf045
                             layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, TileType.UNDERGROUND, null));
                             break;
                         case TileType.FLOOR:
@@ -178,7 +185,11 @@ namespace GameJamUtopiales
                             layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, TileType.GROUNDCORNDOWNLEFT, collideSides));
                             break;
                         case TileType.ROOF:
+<<<<<<< HEAD
                             collideSides.collideBottom = true;
+=======
+                            collideSides.collideTop = true;
+>>>>>>> 82dc22f8c948e4557eab526a945a4c4473abf045
                             layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, TileType.ROOF, collideSides));
                             break;
                         case TileType.BLANK1:
@@ -287,8 +298,11 @@ namespace GameJamUtopiales
                         case TileType.ROCK3:
                             break;
                         case TileType.UNDERGROUND2:
+<<<<<<< HEAD
                             collideSides.collideTop = collideSides.collideBottom = true;
                             collideSides.collideLeft = collideSides.collideRight = true;
+=======
+>>>>>>> 82dc22f8c948e4557eab526a945a4c4473abf045
                             layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, TileType.UNDERGROUND2, null));
                             break;
                         case TileType.EXIT3:
@@ -302,8 +316,11 @@ namespace GameJamUtopiales
                         case TileType.ROCK6:
                             break;
                         case TileType.UNDERGROUND3:
+<<<<<<< HEAD
                             collideSides.collideTop = collideSides.collideBottom = true;
                             collideSides.collideLeft = collideSides.collideRight = true;
+=======
+>>>>>>> 82dc22f8c948e4557eab526a945a4c4473abf045
                             layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth, TileType.UNDERGROUND3, null));
                             break;
                         case TileType.EXIT5:
