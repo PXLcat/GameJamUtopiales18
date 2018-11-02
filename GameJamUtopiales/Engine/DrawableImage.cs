@@ -34,7 +34,7 @@ namespace GameJamUtopiales
 
         public virtual void Draw(SpriteBatch sb, bool horizontalFlip = false)
         {
-            Debug.WriteLine("Méthode Draw de DrawableImage pour " + Texture.Name);
+            //Debug.WriteLine("Méthode Draw de DrawableImage pour " + Texture.Name);
             if (horizontalFlip)
                 sb.Draw(Texture, CurrentPosition, new Rectangle(0, 0, Texture.Width, Texture.Height), Color.White, 0,
                     center, 1, SpriteEffects.FlipHorizontally, LayerDepth);

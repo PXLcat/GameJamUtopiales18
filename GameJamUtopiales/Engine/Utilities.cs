@@ -37,57 +37,69 @@ namespace GameJamUtopiales
 
                 if (closerDistance == distanceVectorTopLeft)
                 {
-                    // Si la distance absolue en X du point en haut à gauche est
-                    // plus proche du centre de la tuile que sa distance en Y
-                    // alors le player touche par son côté haut sinon, il touche par son côté gauche
+                    // Si la distance absolue en X du point en haut à gauche du player est
+                    // plus proche du centre de la tuile que sa distance en Y alors le player
+                    // touche par son côté haut sinon, il touche par son côté gauche
                     if (Math.Abs(distanceLeftX) < Math.Abs(distanceTopY))
                     {
-                        result.collideTop = true;
-                        result.topCollisionPosition = actor2.HitBox.Top;
+                        if (actor2.collisionSides.collideBottom/* && distanceTopY < 0*/)
+                        {
+                            result.collideTop = true;
+                            result.topCollisionPosition = actor2.HitBox.Bottom;
+                        }
                     }
-                    else
+                    else if (actor1.CurrentPlayerCharacter.CharacterFaces == Character.Facing.LEFT && actor2.collisionSides.collideRight && distanceLeftX < 0)
                     {
                         result.collideLeft = true;
-                        result.leftCollisionPosition = actor2.HitBox.Left;
+                        result.leftCollisionPosition = actor2.HitBox.Right;
                     }
                 }
                 else if (closerDistance == distanceVectorTopRight)
                 {
                     if (Math.Abs(distanceRightX) < Math.Abs(distanceTopY))
                     {
-                        result.collideTop = true;
-                        result.topCollisionPosition = actor2.HitBox.Top;
+                        if (actor2.collisionSides.collideBottom /*&& distanceTopY < 0*/)
+                        {
+                            result.collideTop = true;
+                            result.topCollisionPosition = actor2.HitBox.Bottom;
+                        }
                     }
-                    else
+                    else if (actor1.CurrentPlayerCharacter.CharacterFaces == Character.Facing.RIGHT && actor2.collisionSides.collideLeft && distanceRightX > 0)
                     {
                         result.collideRight = true;
-                        result.rightCollisionPosition = actor2.HitBox.Right;
+                        result.rightCollisionPosition = actor2.HitBox.Left;
                     }
                 }
                 else if (closerDistance == distanceVectorBottomLeft)
                 {
                     if (Math.Abs(distanceLeftX) < Math.Abs(distanceBottomY))
                     {
-                        result.collideBottom = true;
-                        result.bottomCollisionPosition = actor2.HitBox.Bottom;
+                        if (actor2.collisionSides.collideTop /*&& distanceBottomY > 0*/)
+                        {
+                            result.collideBottom = true;
+                            result.bottomCollisionPosition = actor2.HitBox.Top;
+                        }
                     }
-                    else
+                    else if(actor1.CurrentPlayerCharacter.CharacterFaces == Character.Facing.LEFT && actor2.collisionSides.collideRight && distanceLeftX < 0)
                     {
                         result.collideLeft = true;
-                        result.leftCollisionPosition = actor2.HitBox.Left;
+                        result.leftCollisionPosition = actor2.HitBox.Right;
                     }
                 }
                 else if (closerDistance == distanceVectorBottomRight)
                 {
                     if (Math.Abs(distanceRightX) < Math.Abs(distanceBottomY))
                     {
-                        result.collideBottom = true;
-                        result.bottomCollisionPosition = actor2.HitBox.Bottom;
+                        if (actor2.collisionSides.collideTop /*&& distanceBottomY > 0*/)
+                        {
+                            result.collideBottom = true;
+                            result.bottomCollisionPosition = actor2.HitBox.Top;
+                        }
                     }
-                    else
+                    else if (actor1.CurrentPlayerCharacter.CharacterFaces == Character.Facing.RIGHT && actor2.collisionSides.collideLeft && distanceRightX > 0)
                     {
                         result.collideRight = true;
-                        result.rightCollisionPosition = actor2.HitBox.Right;
+                        result.rightCollisionPosition = actor2.HitBox.Left;
                     }
                 }
             }

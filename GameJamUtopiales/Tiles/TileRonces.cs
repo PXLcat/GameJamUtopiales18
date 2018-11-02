@@ -9,7 +9,7 @@ namespace GameJamUtopiales
 {
     public class TileRonces : ModelTile
     {
-        public TileRonces(Vector2 currentPosition, int width, int height) : base(currentPosition, width, height)
+        public TileRonces(Vector2 currentPosition, int width, int height, TileType tileType, CollideType collideSides) : base(currentPosition, width, height, tileType, collideSides)
         {
             CurrentPosition = currentPosition;
             traversablePourHumain = false;

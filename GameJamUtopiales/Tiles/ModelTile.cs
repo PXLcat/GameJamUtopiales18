@@ -14,10 +14,14 @@ namespace GameJamUtopiales
         public bool traversablePourHumain = false;
         public bool traversablePourFantome = false;
 
+        public CollideType collisionSides;
+
         public Rectangle HitBox
         {
             get => new Rectangle((int)CurrentPosition.X, (int)CurrentPosition.Y, 100, 100);//TODO
         }
+
+        public TileType TileType { get; set; }
 
         public Vector2 CurrentPosition { get; set; }
         public Vector2 BasePosition { get; set; }
@@ -32,10 +36,17 @@ namespace GameJamUtopiales
         //    sb.Draw(Map.tileset, new Vector2(CurrentPosition.X, CurrentPosition.Y), sourceRectangle, Color.White);
         //}
 
-        public ModelTile(Vector2 basePosition, int width, int height)
+        public ModelTile(Vector2 basePosition, int width, int height, TileType tileType, CollideType collideSides)
         {
+            TileType = tileType;
+
             BasePosition = basePosition;
             CurrentPosition = BasePosition;
+
+            if (collideSides == null)
+                collisionSides = new CollideType();
+            else
+                collisionSides = collideSides;
         }
 
         public void Update(int scrollX, int scrollY) {
