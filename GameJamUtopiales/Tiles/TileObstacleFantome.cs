@@ -10,7 +10,8 @@ namespace GameJamUtopiales
 {
     public class TileObstacleFantome : ModelTile
     {
-        public TileObstacleFantome(Vector2 currentPosition, int width, int height) : base(currentPosition, width, height)
+        public TileObstacleFantome(Vector2 currentPosition, Rectangle sourceRectangle, int width, int height)
+            : base(currentPosition, sourceRectangle, width, height)
         {
             CurrentPosition = currentPosition;
             traversablePourHumain = false;

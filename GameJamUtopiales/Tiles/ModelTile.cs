@@ -27,15 +27,16 @@ namespace GameJamUtopiales
             
         }
 
-        //public void Draw(SpriteBatch sb)
-        //{
-        //    sb.Draw(Map.tileset, new Vector2(CurrentPosition.X, CurrentPosition.Y), sourceRectangle, Color.White);
-        //}
+        public void Draw(SpriteBatch sb)
+        {
+            sb.Draw(Map.tileset, new Vector2(CurrentPosition.X, CurrentPosition.Y), sourceRectangle, Color.White);
+        }
 
-        public ModelTile(Vector2 basePosition, int width, int height)
+        public ModelTile(Vector2 basePosition, Rectangle sourceRectangle,int width, int height)
         {
             BasePosition = basePosition;
             CurrentPosition = BasePosition;
+            this.sourceRectangle = sourceRectangle;
         }
 
         public void Update(int scrollX, int scrollY) {

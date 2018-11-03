@@ -10,19 +10,19 @@ namespace GameJamUtopiales
     public class TileExit : ModelTile
     {
 
-            CharacterMetamorphose typeMetamorphose;
-            MainGame mG;
+        MainGame mG;
 
-            public TileExit(Vector2 currentPosition, int width, int height, MainGame mG) : base(currentPosition, width, height)
-            {
-                CurrentPosition = currentPosition;
-                traversablePourHumain = true;
-                this.mG = mG;
-            }
-            public override void OnCollision(ICollidable other)
-            {
-                mG.gameState.ChangeScene(Gamestate.SceneType.FIN);
-            }
+        public TileExit(Vector2 currentPosition, Rectangle sourceRectangle, int width, int height, MainGame mG)
+        : base(currentPosition, sourceRectangle, width, height)
+        {
+            CurrentPosition = currentPosition;
+            traversablePourHumain = true;
+            this.mG = mG;
+        }
+        public override void OnCollision(ICollidable other)
+        {
+            mG.gameState.ChangeScene(Gamestate.SceneType.FIN);
+        }
 
 
     }

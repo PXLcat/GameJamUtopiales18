@@ -105,113 +105,113 @@ namespace GameJamUtopiales
                         case TileType.NOTHING:
                             break;
                         case TileType.GRASSCORNUPRIGHT:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tilesetRec, tileWidth, tileWidth));
                             break;
                         case TileType.GRASSCORNUPLEFT:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tilesetRec, tileWidth, tileWidth));
                             break;
                         case TileType.GROUNDCORNUPRIGHT:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tilesetRec, tileWidth, tileWidth));
                             break;
                         case TileType.GROUNDCORNUPLEFT:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tilesetRec, tileWidth, tileWidth));
                             break;
                         case TileType.GHOSTPARTICLE:
                             break;
                         case TileType.GHOSTWALL:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tilesetRec, tileWidth, tileWidth));
                             break;
                         case TileType.WALLRIGHT:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tilesetRec, tileWidth, tileWidth));
                             break;
                         case TileType.WALLLEFT:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tilesetRec, tileWidth, tileWidth));
                             break;
                         case TileType.UNDERGROUND:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tilesetRec, tileWidth, tileWidth));
                             break;
                         case TileType.FLOOR:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tilesetRec, tileWidth, tileWidth));
                             break;
                         case TileType.RONCEUP:
-                            layerPlayer.Add(new TileRonces(new Vector2(x, y), tileWidth, tileWidth));
+                            layerPlayer.Add(new TileRonces(new Vector2(x, y), tilesetRec, tileWidth, tileWidth));
                             break;
                         case TileType.RONCEDOWN:
-                            layerPlayer.Add(new TileRonces(new Vector2(x, y), tileWidth, tileWidth));
+                            layerPlayer.Add(new TileRonces(new Vector2(x, y), tilesetRec, tileWidth, tileWidth));
                             break;
                         case TileType.GRASSCORNDOWNRIGHT:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tilesetRec, tileWidth, tileWidth));
                             break;
                         case TileType.GRASSCORNDOWNLEFT:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tilesetRec, tileWidth, tileWidth));
                             break;
                         case TileType.GROUNDCORNDOWNRIGHT:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tilesetRec, tileWidth, tileWidth));
                             break;
                         case TileType.GROUNDCORNDOWNLEFT:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tilesetRec, tileWidth, tileWidth));
                             break;
                         case TileType.ROOF:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tilesetRec, tileWidth, tileWidth));
                             break;
                         case TileType.BLANK1:
                             break;
                         case TileType.MUTH1:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HUMAN));
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tilesetRec, tileWidth, tileWidth, CharacterMetamorphose.HUMAN));
                             break;
                         case TileType.MUTH2:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HUMAN));
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tilesetRec, tileWidth, tileWidth, CharacterMetamorphose.HUMAN));
                             break;
                         case TileType.MUTB1:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.FOETUS));
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tilesetRec, tileWidth, tileWidth, CharacterMetamorphose.FOETUS));
                             break;
                         case TileType.MUTB2:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.FOETUS));
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tilesetRec, tileWidth, tileWidth, CharacterMetamorphose.FOETUS));
                             break;
                         case TileType.MUTF1:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HULK));
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tilesetRec, tileWidth, tileWidth, CharacterMetamorphose.HULK));
                             break;
                         case TileType.MUTF2:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HULK));
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tilesetRec, tileWidth, tileWidth, CharacterMetamorphose.HULK));
                             break;
                         case TileType.MUTH3:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HUMAN));
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tilesetRec, tileWidth, tileWidth, CharacterMetamorphose.HUMAN));
                             break;
                         case TileType.MUTH4:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HUMAN));
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tilesetRec, tileWidth, tileWidth, CharacterMetamorphose.HUMAN));
                             break;
                         case TileType.MUTB3:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.FOETUS));
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tilesetRec, tileWidth, tileWidth, CharacterMetamorphose.FOETUS));
                             break;
                         case TileType.MUTB4:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.FOETUS));
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tilesetRec, tileWidth, tileWidth, CharacterMetamorphose.FOETUS));
                             break;
                         case TileType.MUTF3:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HULK));
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tilesetRec, tileWidth, tileWidth, CharacterMetamorphose.HULK));
                             break;
                         case TileType.MUTF4:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HULK));
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tilesetRec, tileWidth, tileWidth, CharacterMetamorphose.HULK));
                             break;
                         case TileType.MUTH5:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HUMAN));
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tilesetRec, tileWidth, tileWidth, CharacterMetamorphose.HUMAN));
                             break;
                         case TileType.MUTH6:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HUMAN));
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tilesetRec, tileWidth, tileWidth, CharacterMetamorphose.HUMAN));
                             break;
                         case TileType.MUTB5:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.FOETUS));
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tilesetRec, tileWidth, tileWidth, CharacterMetamorphose.FOETUS));
                             break;
                         case TileType.MUTB6:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.FOETUS));
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tilesetRec, tileWidth, tileWidth, CharacterMetamorphose.FOETUS));
                             break;
                         case TileType.MUTF5:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HULK));
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tilesetRec, tileWidth, tileWidth, CharacterMetamorphose.HULK));
                             break;
                         case TileType.MUTF6:
-                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tileWidth, tileWidth, CharacterMetamorphose.HULK));
+                            layerPlayer.Add(new TileTransform(new Vector2(x, y), tilesetRec, tileWidth, tileWidth, CharacterMetamorphose.HULK));
                             break;
                         case TileType.EXIT1:
-                            layerPlayer.Add(new TileExit(new Vector2(x, y), tileWidth, tileWidth,mG));
+                            layerPlayer.Add(new TileExit(new Vector2(x, y), tilesetRec, tileWidth, tileWidth,mG));
                             break;
                         case TileType.EXIT2:
                             break;
@@ -222,7 +222,7 @@ namespace GameJamUtopiales
                         case TileType.ROCK3:
                             break;
                         case TileType.UNDERGROUND2:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tilesetRec, tileWidth, tileWidth));
                             break;
                         case TileType.EXIT3:
                             break;
@@ -235,7 +235,7 @@ namespace GameJamUtopiales
                         case TileType.ROCK6:
                             break;
                         case TileType.UNDERGROUND3:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tilesetRec, tileWidth, tileWidth));
                             break;
                         case TileType.EXIT5:
                             break;
@@ -254,10 +254,10 @@ namespace GameJamUtopiales
                         case TileType.CANNONRIGHT2:
                             break;
                         case TileType.CORNERSINGLELEFT:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tilesetRec, tileWidth, tileWidth));
                             break;
                         case TileType.CORNERSINGLERIGHT:
-                            layerPlayer.Add(new TileGround(new Vector2(x, y), tileWidth, tileWidth));
+                            layerPlayer.Add(new TileGround(new Vector2(x, y), tilesetRec, tileWidth, tileWidth));
                             break;
                         case TileType.CANNONLEFT1:
                             break;
@@ -338,46 +338,11 @@ namespace GameJamUtopiales
 
         public void Draw(SpriteBatch sb)
         {
-            //foreach (var item in layerPlayer)
-            //{
-            //    item.Draw(sb);
-            //}
-
-            int nbLayers = mapData.Layers.Count;
-
-            int line;
-            int column;
-
-            for (int nLayer = 0; nLayer < nbLayers; nLayer++)
+            foreach (var item in layerPlayer)
             {
-                line = 0;
-                column = 0;
-
-                for (int i = 0; i < mapData.Layers[nLayer].Tiles.Count; i++)
-                {
-                    int gid = mapData.Layers[nLayer].Tiles[i].Gid;
-
-                    if (gid != 0)
-                    {
-                        int tileFrame = gid - 1;
-                        int tilesetColumn = tileFrame % tilesetColumns;
-                        int tilesetLine = (int)Math.Floor((double)tileFrame / (double)tilesetColumns);
-
-                        float x = column * tileWidth - ScrollX;
-                        float y = line * tileHeight - ScrollY;
-
-                        Rectangle tilesetRec = new Rectangle(tileWidth * tilesetColumn, tileHeight * tilesetLine, tileWidth, tileHeight);
-
-                        sb.Draw(tileset, new Vector2(x, y), tilesetRec, Color.White);
-                    }
-                    column++;
-                    if (column == mapWidth)
-                    {
-                        column = 0;
-                        line++;
-                    }
-                }
+                item.Draw(sb);
             }
+
         }
     }
     public class Tile {

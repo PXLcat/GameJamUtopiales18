@@ -337,7 +337,7 @@ namespace GameJamUtopiales
                     {
                         PlayerCollision.collideRight = true;
                         PlayerCollision.rightCollisionDepth = byObjectCollision.rightCollisionDepth;
-                        HitBoxLeftMinusOne = cObject.HitBox.Left - 1;
+                        HitBoxLeftMinusOne = cObject.HitBox.Left - 2;
                     }
                     if (!cObject.traversablePourFantome && characterMetamorphose == CharacterMetamorphose.SPIRIT)
                     {
@@ -407,7 +407,7 @@ namespace GameJamUtopiales
                 if (PlayerCollision.rightCollisionDepth > 1)
                 {
 
-                    //this.CurrentPosition = new Vector2(HitBoxLeftMinusOne-CurrentSprite.FrameWidth/2 ,this.CurrentPosition.Y+this.Movement.Y);
+                    this.CurrentPosition = new Vector2(this.CurrentPosition.X , this.CurrentPosition.Y+this.Movement.Y);
 
                 }
 
